@@ -14,8 +14,8 @@ ARG ZIG_VERSION
 RUN wget "https://ziglang.org/download/${ZIG_VERSION}/zig-linux-$(cat /tmp/arch)-${ZIG_VERSION}.tar.xz" && \
     tar -xf /zig-linux-$(cat /tmp/arch)-${ZIG_VERSION}.tar.xz && \
     mkdir -p /opt/ziglang && \
-    mv /zig-linux-$(cat /tmp/arch)-${ZIG_VERSION} /opt/ziglang && \
-    ln -s /usr/bin/zig /opt/ziglang/zig && \
+    mv /zig-linux-$(cat /tmp/arch)-${ZIG_VERSION}/* /opt/ziglang && \
+    ln -s /opt/ziglang/zig /usr/bin/zig && \
     rm -rf /tmp/arch /zig-linux-$(cat /tmp/arch)-${ZIG_VERSION} /zig-linux-$(cat /tmp/arch)-${ZIG_VERSION}.tar.xz
 
 # set entrypoint
