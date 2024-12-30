@@ -1,5 +1,4 @@
-ARG BASE_VERSION=alpine:latest
-FROM ${BASE_VERSION} AS base
+FROM alpine:3.21 AS base
 
 # select arch
 RUN echo $(case "$(uname -m)" in \
@@ -10,7 +9,7 @@ RUN echo $(case "$(uname -m)" in \
         *) echo "unsupported" ;;\
     esac) > /tmp/arch
 
-ARG ZIG_VERSION=0.13.0
+ARG ZIG_VERSION
 # download and install zig
 RUN wget "https://ziglang.org/download/${ZIG_VERSION}/zig-linux-$(cat /tmp/arch)-${ZIG_VERSION}.tar.xz" && \
     tar -xf /zig-linux-$(cat /tmp/arch)-${ZIG_VERSION}.tar.xz && \
