@@ -9,14 +9,14 @@ RUN echo $(case "$(uname -m)" in \
         *) echo "unsupported" ;;\
     esac) > /tmp/arch
 
-ARG ZIG_VERSION
+ARG VERSION
 # download and install zig
-RUN wget "https://ziglang.org/download/${ZIG_VERSION}/zig-linux-$(cat /tmp/arch)-${ZIG_VERSION}.tar.xz" && \
-    tar -xf /zig-linux-$(cat /tmp/arch)-${ZIG_VERSION}.tar.xz && \
+RUN wget "https://ziglang.org/download/${VERSION}/zig-linux-$(cat /tmp/arch)-${VERSION}.tar.xz" && \
+    tar -xf /zig-linux-$(cat /tmp/arch)-${VERSION}.tar.xz && \
     mkdir -p /opt/ziglang && \
-    mv /zig-linux-$(cat /tmp/arch)-${ZIG_VERSION}/* /opt/ziglang && \
+    mv /zig-linux-$(cat /tmp/arch)-${VERSION}/* /opt/ziglang && \
     ln -s /opt/ziglang/zig /usr/bin/zig && \
-    rm -rf /tmp/arch /zig-linux-$(cat /tmp/arch)-${ZIG_VERSION} /zig-linux-$(cat /tmp/arch)-${ZIG_VERSION}.tar.xz
+    rm -rf /tmp/arch /zig-linux-$(cat /tmp/arch)-${VERSION} /zig-linux-$(cat /tmp/arch)-${VERSION}.tar.xz
 
 # set entrypoint
 ENTRYPOINT [ "/usr/bin/zig" ]
