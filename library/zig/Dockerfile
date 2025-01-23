@@ -1,4 +1,4 @@
-FROM alpine:3.21 AS base
+FROM alpine:3.21 AS image
 
 # select arch
 RUN echo $(case "$(uname -m)" in \

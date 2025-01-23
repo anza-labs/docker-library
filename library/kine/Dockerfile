@@ -16,7 +16,7 @@ RUN wget "https://github.com/k3s-io/kine/releases/download/${VERSION}/kine-$(cat
 
 # Use distroless as minimal base image to package the builder binary
 # Refer to https://github.com/GoogleContainerTools/distroless for more details
-FROM gcr.io/distroless/static:latest
+FROM gcr.io/distroless/static:latest AS image
 WORKDIR /
 COPY --from=alpine /workspace/kine .
 ENTRYPOINT ["/kine"]
