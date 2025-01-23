@@ -23,4 +23,5 @@ jobs:
           subjectPattern: ^(?![A-Z]).+$
           scopes: |
             deps
+            kine
             zig
