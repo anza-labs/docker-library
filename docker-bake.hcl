@@ -1,8 +1,6 @@
-variable "kine" { default = "" }
-variable "zig" { default = "" }
-
 target "docker-metadata-action" {}
 
+variable "kine" { default = "" }
 target "kine" {
   inherits   = ["docker-metadata-action"]
   context    = "./library/kine"
@@ -16,6 +14,7 @@ target "kine" {
   }
 }
 
+variable "zig" { default = "" }
 target "zig" {
   inherits   = ["docker-metadata-action"]
   context    = "./library/zig"
