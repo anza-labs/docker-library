@@ -9,5 +9,29 @@
   ],
   "vulnerabilityAlerts": {
     "enabled": true
-  }
+  },
+  "customManagers": [
+    {
+      "fileMatch": [
+        "^library/kine/version.txt$"
+      ],
+      "matchStrings": [
+        "^(?<currentValue>v[0-9\\.]+)$"
+      ],
+      "depNameTemplate": "kine",
+      "datasourceTemplate": "github-releases",
+      "lookupNameTemplate": "k3s-io/kine"
+    },
+    {
+      "fileMatch": [
+        "^library/zig/version.txt$"
+      ],
+      "matchStrings": [
+        "^(?<currentValue>[0-9\\.]+)$"
+      ],
+      "depNameTemplate": "zig",
+      "datasourceTemplate": "github-releases",
+      "lookupNameTemplate": "ziglang/zig"
+    }
+  ]
 }
