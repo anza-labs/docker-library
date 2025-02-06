@@ -1,5 +1,21 @@
 target "docker-metadata-action" {}
 
+variable "go-busybox" { default = "" }
+target "go-busybox" {
+  inherits   = ["docker-metadata-action"]
+  context    = "./library/go-busybox"
+  dockerfile = "Dockerfile"
+  platforms = [
+    "linux/amd64",
+    "linux/arm64",
+    "linux/ppc64le",
+    "linux/riscv64",
+  ]
+  args = {
+    VERSION = "${go-busybox}"
+  }
+}
+
 variable "kine" { default = "" }
 target "kine" {
   inherits   = ["docker-metadata-action"]

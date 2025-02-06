@@ -23,5 +23,6 @@ jobs:
           subjectPattern: ^(?![A-Z]).+$
           scopes: |
             deps
+            go-busybox
             kine
             zig
