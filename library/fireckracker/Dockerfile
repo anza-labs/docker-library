@@ -1,0 +1,17 @@
+FROM alpine:3.21 AS alpine
+
+# renovate: datasource=github-tags depName=firecracker-microvm/firecracker
+ARG VERSION=v1.10.1
+
+WORKDIR /workspace
+RUN wget "https://github.com/firecracker-microvm/firecracker/releases/download/${VERSION}/firecracker-${VERSION}-$(uname -m).tgz" && \
+    mv firecracker-*.tgz firecracker.tgz && \
+    tar -xvf firecracker.tgz && \
+    mv "release-${VERSION}-$(uname -m)/firecracker-${VERSION}-$(uname -m)" firecracker
+
+# Use distroless as minimal base image to package the builder binary
+# Refer to https://github.com/GoogleContainerTools/distroless for more details
+FROM gcr.io/distroless/static:latest AS image
+WORKDIR /
+COPY --from=alpine /workspace/firecracker /bin/firecracker
+ENTRYPOINT ["/bin/firecracker"]

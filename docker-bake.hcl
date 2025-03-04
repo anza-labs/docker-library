@@ -1,5 +1,19 @@
 target "docker-metadata-action" {}
 
+variable "firecracker" { default = "" }
+target "firecracker" {
+  inherits   = ["docker-metadata-action"]
+  context    = "./library/firecracker"
+  dockerfile = "Dockerfile"
+  platforms = [
+    "linux/amd64",
+    "linux/arm64",
+  ]
+  args = {
+    VERSION = "${firecracker}"
+  }
+}
+
 variable "go-busybox" { default = "" }
 target "go-busybox" {
   inherits   = ["docker-metadata-action"]

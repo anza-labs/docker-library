@@ -8,7 +8,9 @@ RUN echo $(case "$(uname -m)" in \
         *) echo "unsupported" ;;\
     esac) > /tmp/arch
 
-ARG VERSION
+# renovate: datasource=github-tags depName=k3s-io/kine
+ARG VERSION=v0.13.10
+
 WORKDIR /workspace
 RUN wget "https://github.com/k3s-io/kine/releases/download/${VERSION}/kine-$(cat /tmp/arch)" && \
     mv kine-* kine && \

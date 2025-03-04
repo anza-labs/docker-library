@@ -12,26 +12,14 @@
   },
   "customManagers": [
     {
+      "customType": "regex",
       "fileMatch": [
-        "^library/kine/version.txt$"
+        "Dockerfile$"
       ],
       "matchStrings": [
-        "^(?<currentValue>v[0-9\\.]+)$"
+        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\sARG VERSION=(?<currentValue>\\S+)"
       ],
-      "depNameTemplate": "kine",
-      "datasourceTemplate": "github-releases",
-      "lookupNameTemplate": "k3s-io/kine"
-    },
-    {
-      "fileMatch": [
-        "^library/zig/version.txt$"
-      ],
-      "matchStrings": [
-        "^(?<currentValue>[0-9\\.]+)$"
-      ],
-      "depNameTemplate": "zig",
-      "datasourceTemplate": "github-releases",
-      "lookupNameTemplate": "ziglang/zig"
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }
   ]
 }

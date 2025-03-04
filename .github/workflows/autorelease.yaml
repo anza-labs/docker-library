@@ -5,7 +5,7 @@ on:
     branches:
       - 'main'
     paths:
-      - 'library/**/version.txt'
+      - 'library/**/Dockerfile'
 
 permissions:
   contents: write

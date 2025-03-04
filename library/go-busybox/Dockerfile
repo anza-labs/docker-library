@@ -2,7 +2,8 @@ FROM docker.io/library/golang:1.24-alpine AS build
 
 RUN go install github.com/u-root/gobusybox/src/cmd/makebb@latest
 
-ARG VERSION 
+ARG VERSION=main
+
 WORKDIR /workspace
 RUN apk add git
 RUN git clone --depth 1 --branch ${VERSION} https://github.com/u-root/u-root.git

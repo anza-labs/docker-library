@@ -9,7 +9,9 @@ RUN echo $(case "$(uname -m)" in \
         *) echo "unsupported" ;;\
     esac) > /tmp/arch
 
-ARG VERSION
+# renovate: datasource=github-tags depName=ziglang/zig
+ARG VERSION=0.13.0
+
 # download and install zig
 RUN wget "https://ziglang.org/download/${VERSION}/zig-linux-$(cat /tmp/arch)-${VERSION}.tar.xz" && \
     tar -xf /zig-linux-$(cat /tmp/arch)-${VERSION}.tar.xz && \
