@@ -12,4 +12,4 @@ COPY --from=minio /usr/bin/mc /usr/bin/mc
 
 # initialize it
 ENV MC_DISABLE_PAGER=1
-RUN mc
+RUN mc || true
