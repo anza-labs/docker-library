@@ -44,6 +44,21 @@ target "kine" {
   }
 }
 
+variable "mc" { default = "" }
+target "mc" {
+  inherits   = ["docker-metadata-action"]
+  context    = "./library/mc"
+  dockerfile = "Dockerfile"
+  platforms = [
+    "linux/amd64",
+    "linux/arm64",
+    "linux/ppc64le",
+  ]
+  args = {
+    VERSION = "${mc}"
+  }
+}
+
 variable "zig" { default = "" }
 target "zig" {
   inherits   = ["docker-metadata-action"]

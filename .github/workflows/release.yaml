@@ -11,6 +11,7 @@ on:
         - firecracker
         - go-busybox
         - kine
+        - mc
         - zig
       version:
         description: 'Version'

@@ -10,6 +10,9 @@
   "vulnerabilityAlerts": {
     "enabled": true
   },
+  "schedule": [
+    "0 7 * * 0"
+  ],
   "customManagers": [
     {
       "customType": "regex",
