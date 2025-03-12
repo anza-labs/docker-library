@@ -1,4 +1,4 @@
-# renovate: datasource=github-tags depName=minio/mc versioning=loose
+# renovate: datasource=github-tags depName=minio/mc versioning=regex:^RELEASE\.?(?<major>\d+)-(?<minor>\d+)-(?<patch>\d+)(.+)?$
 ARG VERSION=RELEASE.2025-02-21T16-00-46Z-cpuv1
 FROM minio/mc:${VERSION} AS minio
 
