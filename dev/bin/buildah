@@ -8,7 +8,7 @@ docker run \
     --network=host \
     --volume="/var/lib/containers/:/var/lib/containers/:rw,Z" \
     --volume="${HOME}/.local/etc/containers/registries.conf.d:/etc/containers/registries.conf.d:ro" \
-    --volume="${PWD}:/mnt:ro" \
-    --workdir="/mnt" \
+    --volume="${PWD}:${PWD}:ro" \
+    --workdir="${PWD}" \
     quay.io/buildah/stable:latest \
     buildah $@

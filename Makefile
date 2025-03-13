@@ -14,13 +14,25 @@ BUILD_ARGS ?=
 SHELL = /usr/bin/env bash -o pipefail
 .SHELLFLAGS = -ec
 
-##@ Deployment
+.PHONY: all
+all: registry
+
+.PHONY: clean
+clean: registry-down
+
+##@ General
+
+.PHONY: help
+help: ## Display this help.
+	@awk 'BEGIN {FS = ":.*##"; printf "\nUsage:\n  make \033[36m<target>\033[0m\n"} /^[a-zA-Z_0-9-]+:.*?##/ { printf "  \033[36m%-15s\033[0m %s\n", $$1, $$2 } /^##@/ { printf "\n\033[1m%s\033[0m\n", substr($$0, 5) } ' $(MAKEFILE_LIST)
+
+##@ Development
 
 # renovate: datasource=docker depName=docker.io/distribution/distribution
 REGISTRY_VERSION ?= 2.8.3
 
 .PHONY: registry
-registry: # Start the local registry using Docker Compose
+registry: ## Start the local registry using Docker Compose
 	$(CONTAINER_TOOL) volume create registry_data
 	$(CONTAINER_TOOL) run -d \
 		--name=registry \
@@ -30,7 +42,7 @@ registry: # Start the local registry using Docker Compose
 		docker.io/distribution/distribution:$(REGISTRY_VERSION)
 
 .PHONY: registry-down
-registry-down: # Stop and remove the local registry using Docker Compose
+registry-down: ## Stop and remove the local registry using Docker Compose
 	-$(CONTAINER_TOOL) stop registry
 	-$(CONTAINER_TOOL) rm registry
 	-$(CONTAINER_TOOL) volume rm registry_data
