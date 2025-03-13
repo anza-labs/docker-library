@@ -45,25 +45,17 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
       - uses: docker/setup-qemu-action@v3
-      - id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: |
-            name=${{ inputs.registry }}/${{ inputs.repository }}/${{ inputs.name }},enable=true
-          tags: |
-            type=semver,pattern={{version}},value=${{ inputs.version }}
-            type=semver,pattern={{major}}.{{minor}},value=${{ inputs.version }}
-            type=sha
-      - run: |
-          echo "variable \"${{ inputs.name }}\" { default = \"${{ inputs.version }}\" }" > ./vars.hcl
       - id: buildx
         uses: docker/setup-buildx-action@v3
-      - uses: docker/bake-action@v6
-        with:
-          builder: ${{ steps.buildx.outputs.name }}
-          push: ${{ inputs.push }}
-          files: |
-            ./docker-bake.hcl
-            cwd://${{ steps.meta.outputs.bake-file }}
-            cwd://vars.hcl
-          targets: ${{ inputs.name }}
+      - run: |
+          ./hack/generate-release-script.sh \
+            'release.sh' \
+            "${{ inputs.registry }}/${{ inputs.repository }}" \
+            'docker' \
+            'buildx build --load' \
+            "" \
+            "${{ inputs.name }}" \
+            "${{ inputs.version }}" \
+            "$(sed -n 's/^# platforms=\(.*\)$/\1/p' ./library/${{ inputs.name }}/Dockerfile)"
+      - run: |
+          ./release.sh

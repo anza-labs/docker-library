@@ -1,3 +1,4 @@
+# platforms=linux/amd64,linux/arm64
 FROM ghcr.io/grpc-ecosystem/grpc-health-probe:v0.4.37 AS probe
 FROM alpine:3.21 AS alpine
 

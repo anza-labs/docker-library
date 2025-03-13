@@ -1,5 +1,5 @@
 # MacOS attributes files
 .DS_Store
 
-# Temporary variables
-vars.hcl
+# Temporary release scripts
+*release.sh

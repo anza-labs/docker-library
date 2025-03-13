@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -e
+
+docker run \
+    --name buildah \
+    --rm --interactive --tty --privileged \
+    --network=host \
+    --volume="/var/lib/containers/:/var/lib/containers/:rw,Z" \
+    --volume="${HOME}/.local/etc/containers/registries.conf.d:/etc/containers/registries.conf.d:ro" \
+    --volume="${PWD}:/mnt:ro" \
+    --workdir="/mnt" \
+    quay.io/buildah/stable:latest \
+    buildah $@
