@@ -31,8 +31,11 @@ help: ## Display this help.
 # renovate: datasource=docker depName=docker.io/distribution/distribution
 REGISTRY_VERSION ?= 2.8.3
 
+# renovate: datasource=docker depName=docker.io/anchore/grype
+GRYPE_VERSION ?= v0.89.0
+
 .PHONY: registry
-registry: ## Start the local registry using Docker Compose
+registry: ## Start the local registry.
 	$(CONTAINER_TOOL) volume create registry_data
 	$(CONTAINER_TOOL) run -d \
 		--name=registry \
@@ -42,12 +45,11 @@ registry: ## Start the local registry using Docker Compose
 		docker.io/distribution/distribution:$(REGISTRY_VERSION)
 
 .PHONY: registry-down
-registry-down: ## Stop and remove the local registry using Docker Compose
+registry-down: ## Stop and remove the local registry.
 	-$(CONTAINER_TOOL) stop registry
 	-$(CONTAINER_TOOL) rm registry
 	-$(CONTAINER_TOOL) volume rm registry_data
 
-# Convert PLATFORMS to a space-separated list (for use in loops)
 c := ,
 PLATFORMS_LIST := $(subst $c, ,$(PLATFORM))
 REPOSITORY_LIST := $(subst $c, ,$(REPOSITORY))
@@ -63,12 +65,24 @@ build-%: ## Build images per platform.
 			./library/$* ; \
 	done
 
-push-%: build-% ## Push images per platform
+push-%: build-% ## Push images per platform.
 	for plat in $(PLATFORMS_LIST); do \
-		for image in $(foreach repo,$(REPOSITORY_LIST),$(foreach tag,$(TAG_LIST),$(repo)/$*:$(tag)-$${plat//\//_})); do \
-			$(CONTAINER_TOOL) push \
-				$${image} ; \
-		done; \
+	for image in $(foreach repo,$(REPOSITORY_LIST),$(foreach tag,$(TAG_LIST),$(repo)/$*:$(tag)-$${plat//\//_})); do \
+		$(CONTAINER_TOOL) push \
+			$${image} ; \
+	done; \
+	done
+
+scan-%: ## Scan image using grype.
+	for repo in $(REPOSITORY_LIST); do \
+	for tag in $(TAG_LIST); do \
+	for plat in $(PLATFORMS_LIST); do \
+		$(CONTAINER_TOOL) run --rm \
+			docker.io/anchore/grype:${GRYPE_VERSION} \
+			--platform=$${platform} \
+			$${repo}/$*:$${tag}; \
+	done; \
+	done; \
 	done
 
 manifest-%: ## Create and push a manifest list that includes all built images.
