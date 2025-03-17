@@ -1,6 +1,10 @@
 # platforms=linux/amd64,linux/arm64,linux/ppc64le,linux/riscv64
 FROM docker.io/library/alpine:3.21.3 AS image
 
+# install some auxiliary packages
+RUN apk add --no-cache \
+    git make pkgconf
+
 # select arch
 RUN echo $(case "$(uname -m)" in \
         x86_64|amd64) echo x86_64 ;;\
