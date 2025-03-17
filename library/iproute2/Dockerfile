@@ -5,6 +5,6 @@ FROM docker.io/library/alpine:3.21.3 AS image
 ARG VERSION="6.11.0-r0"
 
 RUN apk add --no-cache \
-    iproute2="${VERSION}"
+    iproute2 jq
 
 ENTRYPOINT ["ip"]
