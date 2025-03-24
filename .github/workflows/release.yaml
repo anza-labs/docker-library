@@ -8,6 +8,7 @@ on:
         required: true
         type: choice
         options:
+        - cloud-provider-kind
         - firecracker
         - go-busybox
         - kine
