@@ -1,4 +1,4 @@
-# platforms=linux/amd64,linux/arm64,linux/ppc64le,linux/riscv64
+# platforms=linux/amd64,linux/arm64
 FROM docker.io/library/golang:1.24-alpine AS build
 
 # renovate: datasource=github-tags depName=kubernetes-sigs/cloud-provider-kind
