@@ -22,7 +22,6 @@ jobs:
           requireScope: true
           subjectPattern: ^(?![A-Z]).+$
           scopes: |
-            cloud-provider-kind
             deps
             firecracker
             go-busybox
