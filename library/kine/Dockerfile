@@ -1,6 +1,6 @@
 # platforms=linux/amd64,linux/arm64
 FROM ghcr.io/grpc-ecosystem/grpc-health-probe:v0.4.37 AS probe
-FROM alpine:3.21 AS alpine
+FROM docker.io/library/alpine:3.21.3 AS alpine
 
 # select arch
 RUN echo $(case "$(uname -m)" in \
