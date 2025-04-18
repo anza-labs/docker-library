@@ -11,7 +11,7 @@
     "enabled": true
   },
   "schedule": [
-    "* 7 * * 0"
+    "* * * * 6,0"
   ],
   "customManagers": [
     {
