@@ -10,7 +10,7 @@ RUN echo $(case "$(uname -m)" in \
     esac) > /tmp/arch
 
 # renovate: datasource=github-tags depName=k3s-io/kine
-ARG VERSION=v0.13.10
+ARG VERSION=v0.13.14
 
 WORKDIR /workspace
 RUN wget "https://github.com/k3s-io/kine/releases/download/${VERSION}/kine-$(cat /tmp/arch)" && \
