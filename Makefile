@@ -29,7 +29,7 @@ help: ## Display this help.
 ##@ Development
 
 # renovate: datasource=docker depName=docker.io/distribution/distribution
-REGISTRY_VERSION ?= 2.8.3
+REGISTRY_VERSION ?= 3.0.0
 
 # renovate: datasource=docker depName=docker.io/anchore/grype
 GRYPE_VERSION ?= v0.91.0
