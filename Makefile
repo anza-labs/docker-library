@@ -32,7 +32,7 @@ help: ## Display this help.
 REGISTRY_VERSION ?= 2.8.3
 
 # renovate: datasource=docker depName=docker.io/anchore/grype
-GRYPE_VERSION ?= v0.89.0
+GRYPE_VERSION ?= v0.91.0
 
 .PHONY: registry
 registry: ## Start the local registry.
