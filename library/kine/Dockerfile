@@ -1,5 +1,25 @@
 # platforms=linux/amd64,linux/arm64
-FROM ghcr.io/grpc-ecosystem/grpc-health-probe:v0.4.38 AS probe
+FROM docker.io/library/alpine:3.21.3 AS probe
+
+# install some auxiliary packages
+RUN apk add --no-cache \
+    git make pkgconf
+
+# select arch
+RUN echo $(case "$(uname -m)" in \
+        x86_64|amd64) echo amd64 ;;\
+        aarch64|arm64) echo arm64 ;;\
+        *) echo "unsupported" ;;\
+    esac) > /tmp/arch
+
+# renovate: datasource=github-tags depName=ziglang/zig
+ARG PROBE_VERSION=v0.4.38
+
+WORKDIR /workspace
+RUN wget "https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/${PROBE_VERSION}/grpc_health_probe-linux-$(cat /tmp/arch)" && \
+    mv grpc_health_probe-* grpc_health_probe && \
+    chmod +x grpc_health_probe
+
 FROM docker.io/library/alpine:3.21.3 AS alpine
 
 # select arch
@@ -22,5 +42,5 @@ RUN wget "https://github.com/k3s-io/kine/releases/download/${VERSION}/kine-$(cat
 FROM gcr.io/distroless/static:latest AS image
 WORKDIR /
 COPY --from=alpine /workspace/kine /bin/kine
-COPY --from=probe /ko-app/grpc-health-probe /bin/grpc_health_probe
+COPY --from=probe /workspace/grpc_health_probe /bin/grpc_health_probe
 ENTRYPOINT ["/bin/kine"]
