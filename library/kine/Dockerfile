@@ -12,7 +12,7 @@ RUN echo $(case "$(uname -m)" in \
         *) echo "unsupported" ;;\
     esac) > /tmp/arch
 
-# renovate: datasource=github-tags depName=ziglang/zig
+# renovate: datasource=github-tags depName=grpc-ecosystem/grpc-health-probe
 ARG PROBE_VERSION=v0.4.38
 
 WORKDIR /workspace
