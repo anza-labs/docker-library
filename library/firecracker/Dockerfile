@@ -2,7 +2,7 @@
 FROM docker.io/library/alpine:3.21.3 AS alpine
 
 # renovate: datasource=github-tags depName=firecracker-microvm/firecracker
-ARG VERSION=v1.11.0
+ARG VERSION=v1.12.0
 
 WORKDIR /workspace
 RUN wget "https://github.com/firecracker-microvm/firecracker/releases/download/${VERSION}/firecracker-${VERSION}-$(uname -m).tgz" && \
