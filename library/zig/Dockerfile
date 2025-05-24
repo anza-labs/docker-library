@@ -15,7 +15,7 @@ RUN echo $(case "$(uname -m)" in \
     esac) > /tmp/arch
 
 # renovate: datasource=github-tags depName=ziglang/zig
-ARG VERSION=0.14.0
+ARG VERSION=0.14.1
 
 # download and install zig
 RUN wget "https://ziglang.org/download/${VERSION}/zig-linux-$(cat /tmp/arch)-${VERSION}.tar.xz" && \
