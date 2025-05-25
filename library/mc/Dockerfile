@@ -1,6 +1,6 @@
 # platforms=linux/amd64,linux/arm64,linux/ppc64le
 # renovate: datasource=github-tags depName=minio/mc versioning=regex:^RELEASE\.?(?<major>\d+)-(?<minor>\d+)-(?<patch>\d+)(.+)?$
-ARG VERSION=RELEASE.2025-04-16T18-13-26Z
+ARG VERSION=RELEASE.2025-05-21T01-59-54Z
 FROM docker.io/minio/mc:${VERSION} AS minio
 
 FROM docker.io/library/alpine:3.21.3 AS image
