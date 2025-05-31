@@ -1,5 +1,5 @@
 # platforms=linux/amd64,linux/arm64
-FROM docker.io/library/alpine:3.21.3 AS probe
+FROM docker.io/library/alpine:3.22.0 AS probe
 
 # install some auxiliary packages
 RUN apk add --no-cache \
@@ -20,7 +20,7 @@ RUN wget "https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/
     mv grpc_health_probe-* grpc_health_probe && \
     chmod +x grpc_health_probe
 
-FROM docker.io/library/alpine:3.21.3 AS alpine
+FROM docker.io/library/alpine:3.22.0 AS alpine
 
 # select arch
 RUN echo $(case "$(uname -m)" in \

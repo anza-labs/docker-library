@@ -1,5 +1,5 @@
 # platforms=linux/amd64,linux/arm64
-FROM docker.io/library/alpine:3.21.3 AS alpine
+FROM docker.io/library/alpine:3.22.0 AS alpine
 
 # renovate: datasource=github-tags depName=firecracker-microvm/firecracker
 ARG VERSION=v1.12.0
