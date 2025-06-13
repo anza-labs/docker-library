@@ -19,11 +19,11 @@ ARG VERSION=0.14.1
 
 # download and install zig
 RUN wget "https://ziglang.org/download/${VERSION}/zig-$(cat /tmp/arch)-linux-${VERSION}.tar.xz" && \
-    tar -xf /zig-linux-$(cat /tmp/arch)-${VERSION}.tar.xz && \
+    tar -xf /zig-$(cat /tmp/arch)-linux-${VERSION}.tar.xz && \
     mkdir -p /opt/ziglang && \
-    mv /zig-linux-$(cat /tmp/arch)-${VERSION}/* /opt/ziglang && \
+    mv /zig-$(cat /tmp/arch)-linux-${VERSION}/* /opt/ziglang && \
     ln -s /opt/ziglang/zig /usr/bin/zig && \
-    rm -rf /tmp/arch /zig-linux-$(cat /tmp/arch)-${VERSION} /zig-linux-$(cat /tmp/arch)-${VERSION}.tar.xz
+    rm -rf /tmp/arch /zig-$(cat /tmp/arch)-linux-${VERSION} /zig-$(cat /tmp/arch)-linux-${VERSION}.tar.xz
 
 # set entrypoint
 ENTRYPOINT [ "/usr/bin/zig" ]
