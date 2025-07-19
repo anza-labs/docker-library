@@ -3,7 +3,7 @@
 ARG VERSION=RELEASE.2025-05-21T01-59-54Z
 FROM docker.io/minio/mc:${VERSION} AS minio
 
-FROM docker.io/library/alpine:3.22.0 AS image
+FROM docker.io/library/alpine:3.22.1 AS image
 
 # install jq
 RUN apk add --no-cache jq
