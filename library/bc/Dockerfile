@@ -1,7 +1,7 @@
 # platforms=linux/amd64,linux/arm64,linux/ppc64le,linux/riscv64
 FROM ghcr.io/anza-labs/library/zig:0.14.1 AS build
 
-# needs manual updates
+# renovate: datasource=gnu-bc depName=bc
 ARG VERSION=1.08.0
 
 RUN apk add --no-cache \
