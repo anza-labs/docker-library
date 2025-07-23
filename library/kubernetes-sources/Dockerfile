@@ -10,3 +10,5 @@ RUN wget "https://github.com/kubernetes/kubernetes/archive/refs/tags/${VERSION}.
     mv kubernetes-${VERSION#v} /src && \
     rm -rf ${VERSION}.tar.gz
 WORKDIR /src
+
+COPY ./ldflags.sh /opt/ldflags.sh
