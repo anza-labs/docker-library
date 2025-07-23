@@ -8,10 +8,9 @@ RUN apk add --no-cache \
     clang make texinfo
 
 WORKDIR /build
-RUN export BASE_VERSION=${VERSION%%-*} && \
-    wget "https://ftpmirror.gnu.org/bc/bc-${BASE_VERSION}.tar.gz" && \
-    tar -xf bc-${BASE_VERSION}.tar.gz && \
-    mv bc-${BASE_VERSION} bc && \
+RUN wget "https://ftpmirror.gnu.org/bc/bc-${VERSION}.tar.gz" && \
+    tar -xf bc-${VERSION}.tar.gz && \
+    mv bc-${VERSION} bc && \
     cd bc && \
     ./configure CC="clang -static" && \
     make
