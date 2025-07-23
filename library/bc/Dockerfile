@@ -1,18 +1,19 @@
-# platforms=linux/amd64,linux/arm64,linux/ppc64le,linux/riscv64
-FROM ghcr.io/anza-labs/library/zig:0.14.1 AS build
+# platforms=linux/amd64,linux/arm64,linux/riscv64
+FROM docker.io/library/alpine:3.22.1 AS build
 
-# renovate: datasource=gnu-bc depName=bc
-ARG VERSION=1.08.0
+# renovate: datasource=repology depName=alpine_edge/bc versioning=loose
+ARG VERSION=1.08.0-r0
 
 RUN apk add --no-cache \
-    clang texinfo
+    clang make texinfo
 
 WORKDIR /build
-RUN wget "https://ftpmirror.gnu.org/bc/bc-${VERSION}.tar.gz" && \
-    tar -xf bc-${VERSION}.tar.gz && \
-    mv bc-${VERSION} bc && \
+RUN export BASE_VERSION=${VERSION%%-*} && \
+    wget "https://ftpmirror.gnu.org/bc/bc-${BASE_VERSION}.tar.gz" && \
+    tar -xf bc-${BASE_VERSION}.tar.gz && \
+    mv bc-${BASE_VERSION} bc && \
     cd bc && \
-    ./configure CC="zig cc -static -target $(arch)-linux-musl" && \
+    ./configure CC="clang -static" && \
     make
 
 FROM scratch AS image
