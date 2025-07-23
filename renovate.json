@@ -13,6 +13,20 @@
   "schedule": [
     "* * * * 6,0"
   ],
+  "customDatasources": {
+    "gnu-bc": {
+      "defaultRegistryUrlTemplate": "https://ftpmirror.gnu.org/bc",
+      "format": "html"
+    }
+  },
+  "packageRules": [
+    {
+      "matchDatasources": [
+        "gnu-bc"
+      ],
+      "extractVersion": "href=\"bc-(?<version>.+)\\.tar\\.gz\""
+    }
+  ],
   "customManagers": [
     {
       "customType": "regex",
