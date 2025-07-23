@@ -13,7 +13,7 @@ RUN apk add --no-cache \
     bash bc git make pkgconf tar xz
 
 # renovate: datasource=github-tags depName=amber-lang/amber
-ARG VERSION="0.4.0-alpha"
+ARG VERSION=0.4.0-alpha
 
 # download and install amber
 RUN wget "https://github.com/amber-lang/amber/releases/download/${VERSION}/amber-$(cat /tmp/arch)-unknown-linux-gnu.tar.xz" && \
