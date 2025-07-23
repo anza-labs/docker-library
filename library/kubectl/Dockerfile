@@ -1,4 +1,4 @@
-# platforms=linux/amd64,linux/arm64,linux/ricv64
+# platforms=linux/amd64,linux/arm64,linux/riscv64
 ARG VERSION=v1.33.0
 FROM --platform=$BUILDPLATFORM ghcr.io/anza-labs/library/kubernetes-sources:${VERSION} AS pre-build
 FROM --platform=$BUILDPLATFORM tonistiigi/xx AS xx
