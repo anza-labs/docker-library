@@ -17,9 +17,7 @@ RUN xx-go build \
         -o ./bin/kubelet \
         ./cmd/kubelet
 
-# Use distroless as minimal base image to package the builder binary
-# Refer to https://github.com/GoogleContainerTools/distroless for more details
-FROM gcr.io/distroless/static:latest AS image
+FROM scratch AS image
 
 WORKDIR /
 
