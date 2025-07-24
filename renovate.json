@@ -38,6 +38,16 @@
         "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+\"(?<currentValue>\\S+)\""
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    },
+    {
+      "customType": "regex",
+      "managerFilePatterns": [
+        "/pkg.toml$/"
+      ],
+      "matchStrings": [
+        "# renovate+git: datasource=(?<datasource>.*?) depName=(?<depName>.*?) packageName=(?<packageName>.*?)( versioning=(?<versioning>.*?))?\\s+\"(?<currentValue>\\S+)\""
+      ],
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }
   ]
 }
