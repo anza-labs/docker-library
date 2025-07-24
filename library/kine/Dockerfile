@@ -35,9 +35,7 @@ RUN wget "https://github.com/k3s-io/kine/releases/download/${VERSION}/kine-$(cat
     mv kine-* kine && \
     chmod +x kine
 
-# Use distroless as minimal base image to package the builder binary
-# Refer to https://github.com/GoogleContainerTools/distroless for more details
-FROM gcr.io/distroless/static:latest AS image
+FROM scratch AS image
 WORKDIR /
 COPY --from=alpine /workspace/kine /bin/kine
 COPY --from=probe /workspace/grpc_health_probe /bin/grpc_health_probe
