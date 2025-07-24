@@ -89,11 +89,6 @@ FROM base AS kubelet
 COPY --from=kubelet-build /src/bin/kubelet /bin/kubelet
 ENTRYPOINT [ "/bin/kubelet" ]
 
-FROM docker.io/library/alpine:3.22.1 AS cbuild
-
-RUN apk add --no-cache \
-    clang make
-
 FROM base AS image
 COPY --from=kube-apiserver /bin/kube-apiserver /bin/kube-apiserver
 COPY --from=kube-controller-manager /bin/kube-controller-manager /bin/kube-controller-manager
