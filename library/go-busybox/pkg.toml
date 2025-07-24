@@ -1,0 +1,10 @@
+versions = [
+    "main",
+]
+
+arch = [
+    "amd64",
+    "arm64",
+    "ppc64le",
+    "riscv64",
+]

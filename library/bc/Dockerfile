@@ -1,8 +1,6 @@
-# platforms=linux/amd64,linux/arm64,linux/riscv64
 FROM docker.io/library/alpine:3.22.1 AS build
 
-# renovate: datasource=repology depName=homebrew/bc versioning=loose
-ARG VERSION=1.08.0
+ARG VERSION
 
 RUN apk add --no-cache \
     clang make texinfo

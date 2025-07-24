@@ -1,0 +1,10 @@
+versions = [
+# renovate: datasource=github-tags depName=k3s-io/kine
+    "v0.13.17",
+]
+
+arch = [
+    "amd64",
+    "arm64",
+    "riscv64",
+]

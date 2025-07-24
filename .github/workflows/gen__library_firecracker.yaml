@@ -1,0 +1,93 @@
+jobs:
+  build:
+    env: {}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          password: ${{ secrets.GITHUB_ACTION }}
+          registry: ghcr.io
+          username: shanduur-auto
+      - uses: docker/setup-qemu-action@v3
+      - uses: docker/setup-buildx-action@v3
+      - run: |-
+          docker \
+              buildx \
+              build \
+              --load \
+              --target=${{ matrix.target }} \
+              --build-arg=VERSION=${{ matrix.version }} \
+              --platform=linux/${{ matrix.arch }} \
+              --file=library/firecracker/Dockerfile \
+              --tag=ghcr.io/anza-labs/library/firecracker:${{ matrix.version }}-${{ matrix.arch }} \
+              library/firecracker
+      - run: |-
+          docker \
+              push \
+              ghcr.io/anza-labs/library/firecracker:${{ matrix.version }}-${{ matrix.arch }}
+    strategy:
+      matrix:
+        arch:
+          - amd64
+          - arm64
+        target:
+          - image
+        version:
+          - v1.12.1
+  promote:
+    env: {}
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: docker/login-action@v3
+        with:
+          password: ${{ secrets.GITHUB_ACTION }}
+          registry: ghcr.io
+          username: shanduur-auto
+      - uses: docker/setup-buildx-action@v3
+      - run: |-
+          docker \
+              manifest \
+              create \
+              --amend \
+              ghcr.io/anza-labs/library/firecracker:${{ matrix.version }} \
+              ghcr.io/anza-labs/library/firecracker:${{ matrix.version }}-amd64 \
+              ghcr.io/anza-labs/library/firecracker:${{ matrix.version }}-arm64
+      - run: |-
+          docker \
+              manifest \
+              annotate \
+              --arch=amd64 \
+              ghcr.io/anza-labs/library/firecracker:${{ matrix.version }} \
+              ghcr.io/anza-labs/library/firecracker:${{ matrix.version }}-amd64 && \
+          docker \
+              manifest \
+              annotate \
+              --arch=arm64 \
+              ghcr.io/anza-labs/library/firecracker:${{ matrix.version }} \
+              ghcr.io/anza-labs/library/firecracker:${{ matrix.version }}-arm64
+      - run: |-
+          docker \
+              manifest \
+              push \
+              ghcr.io/anza-labs/library/firecracker:${{ matrix.version }}
+    strategy:
+      matrix:
+        target:
+          - image
+        version:
+          - v1.12.1
+name: release library/firecracker
+"on":
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/gen__library_firecracker.yaml
+      - library/firecracker/Dockerfile
+  workflow_dispatch: {}
+permissions:
+  contents: write
+  packages: write

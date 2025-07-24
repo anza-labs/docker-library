@@ -1,0 +1,56 @@
+name: autoactions
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - internal/*
+      - library/*/pkg.toml
+      - build.toml
+      - magefile.go
+
+jobs:
+  auto-actions:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          fetch-depth: 0
+
+      - run: |
+          wget -O /usr/local/bin/semver \
+            https://raw.githubusercontent.com/fsaintjacques/semver-tool/master/src/semver
+          chmod +x /usr/local/bin/semver
+
+      - run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.COMMIT_SIGNING }}" > ~/.ssh/signing_key
+          chmod 600 ~/.ssh/signing_key
+          eval "$(ssh-agent -s)"
+          ssh-add ~/.ssh/signing_key
+          git config user.name shanduur-auto
+          git config user.email 75127809+shanduur-auto@users.noreply.github.com
+          git config gpg.format ssh
+          git config user.signingkey ~/.ssh/signing_key
+          git config commit.gpgsign true
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: ./go.mod
+
+      - run: |
+          go tool mage actions
+
+      - run: |
+          git add .
+          git commit -sm "chore: generated actions" || echo "skip_push=true" >> "${GITHUB_ENV}"
+
+      - uses: ad-m/github-push-action@master
+        if: env.skip_push != 'true'
+        with:
+          github_token: ${{ secrets.PAT }}
+          branch: ${{ github.head_ref }}

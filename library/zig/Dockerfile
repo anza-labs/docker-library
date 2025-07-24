@@ -1,4 +1,3 @@
-# platforms=linux/amd64,linux/arm64,linux/ppc64le,linux/riscv64
 FROM docker.io/library/alpine:3.22.1 AS image
 
 # install some auxiliary packages
@@ -14,8 +13,7 @@ RUN echo $(case "$(uname -m)" in \
         *) echo "unsupported" ;;\
     esac) > /tmp/arch
 
-# renovate: datasource=github-tags depName=ziglang/zig
-ARG VERSION=0.14.1
+ARG VERSION
 
 # download and install zig
 RUN wget "https://ziglang.org/download/${VERSION}/zig-$(cat /tmp/arch)-linux-${VERSION}.tar.xz" && \

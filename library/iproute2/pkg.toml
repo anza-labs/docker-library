@@ -1,0 +1,11 @@
+versions = [
+# renovate: datasource=repology depName=alpine_3_22/iproute2 versioning=loose
+    "6.15.0-r0",
+]
+
+arch = [
+    "amd64",
+    "arm64",
+    "ppc64le",
+    "riscv64",
+]

@@ -1,0 +1,36 @@
+use = "docker"
+
+[registry]
+    name = "ghcr.io"
+    repository = "anza-labs"
+    username = "shanduur-auto"
+
+[workflow]
+    prefix = "gen_"
+
+[engine.buildah]
+    build = [ "bud" ]
+    push = [ "push" ]
+
+    [engine.buildah.manifest]
+    create = [ "manifest", "create", "--amend" ]
+    annotate = [ "manifest", "annotate" ]
+    push = [ "manifest", "push" ]
+
+[engine.docker]
+    build = [ "buildx", "build", "--load" ]
+    push = [ "push" ]
+
+    [engine.docker.manifest]
+    create = [ "manifest", "create", "--amend" ]
+    annotate = [ "manifest", "annotate" ]
+    push = [ "manifest", "push" ]
+
+[engine.podman]
+    build = [ "build" ]
+    push = [ "push" ]
+
+    [engine.podman.manifest]
+    create = [ "manifest", "create", "--amend" ]
+    annotate = [ "manifest", "annotate" ]
+    push = [ "manifest", "push" ]

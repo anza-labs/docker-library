@@ -1,0 +1,10 @@
+versions = [
+# renovate: datasource=repology depName=homebrew/bc versioning=loose
+    "1.08.0",
+]
+
+arch = [
+    "amd64",
+    "arm64",
+    "riscv64",
+]

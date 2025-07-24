@@ -7,27 +7,12 @@
 
 1. Building image:
     ```sh
-    make build-zig \
-        BUILD_ARGS='VERSION=0.14.0' \
-        REPOSITORY="localhost:5005/${USER}" \
-        TAG='0.14.0' \
-        PLATFORM="$(sed -n 's/^# platforms=\(.*\)$/\1/p' ./library/zig/Dockerfile)"
+    mage build library/zig 0.14.1 arm64 image
     ```
 
 2. Pushing image:
     ```sh
-    make push-zig \
-        REPOSITORY="localhost:5005/${USER}" \
-        TAG='0.14.0' \
-        PLATFORM="$(sed -n 's/^# platforms=\(.*\)$/\1/p' ./library/zig/Dockerfile)"
-    ```
-
-3. Generating multi-arch manifest:
-    ```sh
-    make manifest-zig \
-        REPOSITORY="localhost:5005/${USER}" \
-        TAG='0.14.0' \
-        PLATFORM="$(sed -n 's/^# platforms=\(.*\)$/\1/p' ./library/zig/Dockerfile)"
+    mage push library/zig 0.14.1 arm64 image
     ```
 
 ## Contributing

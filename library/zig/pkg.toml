@@ -1,0 +1,11 @@
+versions = [
+# renovate: datasource=github-tags depName=ziglang/zig
+    "0.14.1",
+]
+
+arch = [
+    "amd64",
+    "arm64",
+    "ppc64le",
+    "riscv64",
+]

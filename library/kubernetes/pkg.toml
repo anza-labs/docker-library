@@ -1,0 +1,21 @@
+versions = [ 
+# renovate: datasource=docker depName=ghcr.io/anza-labs/library/kubernetes-sources
+    "v1.32.0",
+# renovate: datasource=docker depName=ghcr.io/anza-labs/library/kubernetes-sources
+    "v1.33.0",
+]
+
+arch = [
+    "amd64",
+    "arm64",
+    "riscv64",
+]
+
+targets = [
+    "kube-apiserver",
+    "kube-controller-manager",
+    "kube-scheduler",
+    "kube-proxy",
+    "kubectl",
+    "kubelet",
+]

@@ -1,8 +1,7 @@
 # platforms=linux/amd64,linux/arm64
 FROM docker.io/library/alpine:3.22.1 AS alpine
 
-# renovate: datasource=github-tags depName=firecracker-microvm/firecracker
-ARG VERSION=v1.12.1
+ARG VERSION
 
 WORKDIR /workspace
 RUN wget "https://github.com/firecracker-microvm/firecracker/releases/download/${VERSION}/firecracker-${VERSION}-$(uname -m).tgz" && \

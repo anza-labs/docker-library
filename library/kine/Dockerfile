@@ -1,4 +1,3 @@
-# platforms=linux/amd64,linux/arm64
 FROM docker.io/library/alpine:3.22.1 AS probe
 
 # install some auxiliary packages
@@ -29,8 +28,7 @@ RUN echo $(case "$(uname -m)" in \
         *) echo "unsupported" ;;\
     esac) > /tmp/arch
 
-# renovate: datasource=github-tags depName=k3s-io/kine
-ARG VERSION=v0.13.17
+ARG VERSION
 
 WORKDIR /workspace
 RUN wget "https://github.com/k3s-io/kine/releases/download/${VERSION}/kine-$(cat /tmp/arch)" && \

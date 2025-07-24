@@ -1,0 +1,8 @@
+versions = [
+    "0.4.0-alpha",
+]
+
+arch = [
+# renovate: datasource=github-tags depName=amber-lang/amber
+    "amd64",
+]
