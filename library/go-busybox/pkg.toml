@@ -1,5 +1,5 @@
 versions = [
-# renovate: datasource=git-refs depName=u-root/u-root versioning=git
+# renovate: datasource=git-refs depName=https://github.com/u-root/u-root versioning=git
     "c2b9e48e151e8efeab13029a9bcf9236eae176ca",
 ]
 
