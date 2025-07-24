@@ -7,12 +7,12 @@
 
 1. Building image:
     ```sh
-    mage build library/zig 0.14.1 arm64 image
+    go tool mage build library/zig 0.14.1 arm64 image
     ```
 
 2. Pushing image:
     ```sh
-    mage push library/zig 0.14.1 arm64 image
+    go tool mage push library/zig 0.14.1 arm64 image
     ```
 
 ## Contributing
