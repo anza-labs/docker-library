@@ -6,5 +6,5 @@ versions = [
 arch = [
     "amd64",
     "arm64",
-    "riscv64",
+    # "riscv64",
 ]
