@@ -30,7 +30,6 @@ RUN xx-go build \
         -o ./bin/kube-apiserver \
         ./cmd/kube-apiserver
 
-
 FROM base AS kube-apiserver
 COPY --from=kube-apiserver-build /src/bin/kube-apiserver /bin/kube-apiserver-apiserver
 ENTRYPOINT [ "/kube-apiserver" ]
@@ -41,7 +40,6 @@ RUN xx-go build \
         -trimpath \
         -o ./bin/kube-controller-manager \
         ./cmd/kube-controller-manager
-
 
 FROM base AS kube-controller-manager
 COPY --from=kube-controller-manager-build /src/bin/kube-controller-manager /bin/kube-controller-manager-controller-manager
@@ -54,7 +52,6 @@ RUN xx-go build \
         -o ./bin/kube-proxy \
         ./cmd/kube-proxy
 
-
 FROM base AS kube-proxy
 COPY --from=kube-proxy-build /src/bin/kube-proxy /bin/kube-proxy-proxy
 ENTRYPOINT [ "/kube-proxy" ]
@@ -65,7 +62,6 @@ RUN xx-go build \
         -trimpath \
         -o ./bin/kube-scheduler \
         ./cmd/kube-scheduler
-
 
 FROM base AS kube-scheduler
 COPY --from=kube-scheduler-build /src/bin/kube-scheduler /bin/kube-scheduler-scheduler
@@ -78,7 +74,6 @@ RUN xx-go build \
         -o ./bin/kubectl \
         ./cmd/kubectl
 
-
 FROM base AS kubectl
 COPY --from=kubectl-build /src/bin/kubectl /bin/kubectl
 ENTRYPOINT [ "/kubectl" ]
@@ -89,7 +84,6 @@ RUN xx-go build \
         -trimpath \
         -o ./bin/kubelet \
         ./cmd/kubelet
-
 
 FROM base AS kubelet
 COPY --from=kubelet-build /src/bin/kubelet /bin/kubelet
