@@ -35,7 +35,6 @@ jobs:
         target:
           - image
         version:
-          - v1.32.0
           - v1.33.0
   promote:
     env: {}
@@ -87,7 +86,6 @@ jobs:
         target:
           - image
         version:
-          - v1.32.0
           - v1.33.0
 name: release library/kubernetes-sources
 "on":
