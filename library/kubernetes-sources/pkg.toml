@@ -1,7 +1,5 @@
 versions = [ 
 # renovate: datasource=github-tags depName=kubernetes/kubernetes
-    "v1.32.0",
-# renovate: datasource=github-tags depName=kubernetes/kubernetes
     "v1.33.0",
 ]
 

@@ -1,7 +1,5 @@
 versions = [ 
 # renovate: datasource=docker depName=ghcr.io/anza-labs/library/kubernetes-sources
-    "v1.32.0",
-# renovate: datasource=docker depName=ghcr.io/anza-labs/library/kubernetes-sources
     "v1.33.0",
 ]
 
