@@ -60,7 +60,7 @@ func (r *Registry) Default() {
 	}
 
 	if r.Password == "" {
-		r.Password = "${{ secrets.GITHUB_ACTION }}"
+		r.Password = "${{ secrets.GITHUB_TOKEN }}"
 	}
 
 }
