@@ -13,6 +13,11 @@
   "schedule": [
     "* * * * 6,0"
   ],
+  "ignorePaths": [
+    "**/node_modules/**",
+    "**/bower_components/**",
+    ".github/workflows/gen_*"
+  ],
   "customManagers": [
     {
       "customType": "regex",
