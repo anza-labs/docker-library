@@ -4,20 +4,22 @@ RUN go install github.com/u-root/gobusybox/src/cmd/makebb@latest
 
 ARG VERSION
 
-WORKDIR /workspace
-RUN apk add git
-RUN git clone --depth 1 --branch ${VERSION} https://github.com/u-root/u-root.git
-WORKDIR /workspace/u-root
+WORKDIR /
+RUN wget "https://github.com/u-root/u-root/archive/${VERSION}.tar.gz" && \
+    tar -xf ${VERSION}.tar.gz && \
+    mv u-root-${VERSION#v} /src && \
+    rm -rf ${VERSION}.tar.gz
+WORKDIR /src
 RUN touch bubble-sh.history
 COPY ./scripts/read-links.sh /tmp/read-links.sh
 RUN makebb \
         cmds/core/\* \
         cmds/exp/\* && \
-    /tmp/read-links.sh /workspace/u-root/bb
+    /tmp/read-links.sh /src/bb
 
 FROM scratch AS image
-COPY --from=build /workspace/u-root/bb /bin/bb
-COPY --from=build /workspace/u-root/bubble-sh.history /tmp/bubble-sh.history
+COPY --from=build /src/bb /bin/bb
+COPY --from=build /src/bubble-sh.history /tmp/bubble-sh.history
 COPY --from=build /tmp/bb_cmds.txt /tmp/bb_cmds.txt
 COPY ./scripts/make-links.sh /tmp/make-links.sh
 
