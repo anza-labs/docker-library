@@ -32,7 +32,7 @@ RUN xx-go build \
 
 FROM base AS kube-apiserver
 COPY --from=kube-apiserver-build /src/bin/kube-apiserver /bin/kube-apiserver-apiserver
-ENTRYPOINT [ "/kube-apiserver" ]
+ENTRYPOINT [ "/bin/kube-apiserver" ]
 
 FROM build AS kube-controller-manager-build
 RUN xx-go build \
@@ -43,7 +43,7 @@ RUN xx-go build \
 
 FROM base AS kube-controller-manager
 COPY --from=kube-controller-manager-build /src/bin/kube-controller-manager /bin/kube-controller-manager-controller-manager
-ENTRYPOINT [ "/kube-controller-manager" ]
+ENTRYPOINT [ "/bin/kube-controller-manager" ]
 
 FROM build AS kube-proxy-build
 RUN xx-go build \
@@ -54,7 +54,7 @@ RUN xx-go build \
 
 FROM base AS kube-proxy
 COPY --from=kube-proxy-build /src/bin/kube-proxy /bin/kube-proxy-proxy
-ENTRYPOINT [ "/kube-proxy" ]
+ENTRYPOINT [ "/bin/kube-proxy" ]
 
 FROM build AS kube-scheduler-build
 RUN xx-go build \
@@ -65,7 +65,7 @@ RUN xx-go build \
 
 FROM base AS kube-scheduler
 COPY --from=kube-scheduler-build /src/bin/kube-scheduler /bin/kube-scheduler-scheduler
-ENTRYPOINT [ "/kube-scheduler" ]
+ENTRYPOINT [ "/bin/kube-scheduler" ]
 
 FROM build AS kubectl-build
 RUN xx-go build \
@@ -76,7 +76,7 @@ RUN xx-go build \
 
 FROM base AS kubectl
 COPY --from=kubectl-build /src/bin/kubectl /bin/kubectl
-ENTRYPOINT [ "/kubectl" ]
+ENTRYPOINT [ "/bin/kubectl" ]
 
 FROM build AS kubelet-build
 RUN xx-go build \
@@ -87,7 +87,12 @@ RUN xx-go build \
 
 FROM base AS kubelet
 COPY --from=kubelet-build /src/bin/kubelet /bin/kubelet
-ENTRYPOINT [ "/kubelet" ]
+ENTRYPOINT [ "/bin/kubelet" ]
+
+FROM docker.io/library/alpine:3.22.1 AS cbuild
+
+RUN apk add --no-cache \
+    clang make
 
 FROM base AS image
 COPY --from=kube-apiserver /bin/kube-apiserver /bin/kube-apiserver
