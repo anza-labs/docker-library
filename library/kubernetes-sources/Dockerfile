@@ -1,4 +1,4 @@
-FROM docker.io/library/golang:1.24 AS sources
+FROM docker.io/library/golang:1.24 AS image
 
 ARG VERSION
 
