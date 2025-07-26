@@ -35,7 +35,7 @@ jobs:
         target:
           - image
         version:
-          - RELEASE.2025-07-16T15-35-03Z
+          - RELEASE.2025-07-21T05-28-08Z
   promote:
     env: {}
     needs: build
@@ -86,7 +86,7 @@ jobs:
         target:
           - image
         version:
-          - RELEASE.2025-07-16T15-35-03Z
+          - RELEASE.2025-07-21T05-28-08Z
 name: release library/mc
 "on":
   push:
