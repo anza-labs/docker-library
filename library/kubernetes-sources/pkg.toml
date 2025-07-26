@@ -1,6 +1,6 @@
 versions = [ 
 # renovate: datasource=github-tags depName=kubernetes/kubernetes
-    "v1.33.0",
+    "v1.33.3",
 ]
 
 arch = [
