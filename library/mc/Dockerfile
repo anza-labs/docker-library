@@ -7,8 +7,8 @@ FROM docker.io/library/alpine:3.22.1 AS image
 RUN apk add --no-cache jq
 
 # install mc
-COPY --from=minio /usr/bin/mc /usr/bin/mc
+COPY --from=minio /usr/bin/mc /usr/local/bin/mc
 
 # initialize it
 ENV MC_DISABLE_PAGER=1
-RUN mc || true
+RUN /usr/local/bin/mc || true

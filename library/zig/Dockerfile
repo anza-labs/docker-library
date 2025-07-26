@@ -20,8 +20,8 @@ RUN wget "https://ziglang.org/download/${VERSION}/zig-$(cat /tmp/arch)-linux-${V
     tar -xf /zig-$(cat /tmp/arch)-linux-${VERSION}.tar.xz && \
     mkdir -p /opt/ziglang && \
     mv /zig-$(cat /tmp/arch)-linux-${VERSION}/* /opt/ziglang && \
-    ln -s /opt/ziglang/zig /usr/bin/zig && \
+    ln -s /opt/ziglang/zig /usr/local/bin/zig && \
     rm -rf /tmp/arch /zig-$(cat /tmp/arch)-linux-${VERSION} /zig-$(cat /tmp/arch)-linux-${VERSION}.tar.xz
 
 # set entrypoint
-ENTRYPOINT [ "/usr/bin/zig" ]
+ENTRYPOINT [ "/usr/local/bin/zig" ]

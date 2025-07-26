@@ -15,6 +15,6 @@ RUN wget "https://ftpmirror.gnu.org/bc/bc-${VERSION}.tar.gz" && \
 
 FROM scratch AS image
 
-COPY --from=build /build/bc/bc/bc /bc
+COPY --from=build /build/bc/bc/bc /usr/bin/bc
 
-ENTRYPOINT [ "/bc" ]
+ENTRYPOINT [ "/usr/bin/bc" ]

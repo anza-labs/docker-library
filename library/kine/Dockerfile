@@ -37,6 +37,6 @@ RUN wget "https://github.com/k3s-io/kine/releases/download/${VERSION}/kine-$(cat
 
 FROM scratch AS image
 WORKDIR /
-COPY --from=alpine /workspace/kine /bin/kine
-COPY --from=probe /workspace/grpc_health_probe /bin/grpc_health_probe
-ENTRYPOINT ["/bin/kine"]
+COPY --from=alpine /workspace/kine /usr/local/bin/kine
+COPY --from=probe /workspace/grpc_health_probe /usr/local/bin/grpc_health_probe
+ENTRYPOINT ["/usr/local/bin/kine"]

@@ -18,8 +18,8 @@ RUN wget "https://github.com/amber-lang/amber/releases/download/${VERSION}/amber
     tar -xf /amber-$(cat /tmp/arch)-unknown-linux-gnu.tar.xz && \
     mkdir -p /opt/amber && \
     mv /amber-$(cat /tmp/arch)-unknown-linux-gnu/* /opt/amber && \
-    ln -s /opt/amber/amber /usr/bin/amber && \
+    ln -s /opt/amber/amber /usr/local/bin/amber && \
     rm -rf /tmp/arch /amber-$(cat /tmp/arch)-unknown-linux-gnu /amber-$(cat /tmp/arch)-unknown-linux-gnu.tar.xz
 
 # set entrypoint
-ENTRYPOINT [ "/usr/bin/amber" ]
+ENTRYPOINT [ "/usr/local/bin/amber" ]
