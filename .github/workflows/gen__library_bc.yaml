@@ -35,7 +35,7 @@ jobs:
         target:
           - image
         version:
-          - 1.08.0
+          - 1.08.2
   promote:
     env: {}
     needs: build
@@ -86,7 +86,7 @@ jobs:
         target:
           - image
         version:
-          - 1.08.0
+          - 1.08.2
 name: release library/bc
 "on":
   push:
