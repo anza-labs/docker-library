@@ -16,6 +16,12 @@ jobs:
               buildx \
               build \
               --load \
+              --label=org.opencontainers.image.authors='anza-labs contributors' \
+              --label=org.opencontainers.image.created='${{ github.event.created_at }}' \
+              --label=org.opencontainers.image.revision='${{ github.sha }}' \
+              --label=org.opencontainers.image.source='https://github.com/anza-labs/docker-library' \
+              --label=org.opencontainers.image.url='${{ github.event.repository.html_url }}' \
+              --label=org.opencontainers.image.vendor='anza-labs' \
               --target=${{ matrix.target }} \
               --build-arg=VERSION=${{ matrix.version }} \
               --platform=linux/${{ matrix.arch }} \

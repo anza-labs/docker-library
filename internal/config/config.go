@@ -30,6 +30,7 @@ func Load(file string, v Defaulter) error {
 
 type Config struct {
 	Use      string             `toml:"use"`
+	Labels   map[string]string  `toml:"labels"`
 	Registry *Registry          `toml:"registry"`
 	Workflow *Workflow          `toml:"workflow"`
 	Engines  map[string]*Engine `toml:"engine"`
@@ -88,10 +89,11 @@ type Manifest struct {
 }
 
 type Package struct {
-	OS       string   `toml:"os"`
-	Arch     []string `toml:"arch"`
-	Versions []string `toml:"versions"`
-	Targets  []string `toml:"targets"`
+	OS       string            `toml:"os"`
+	Arch     []string          `toml:"arch"`
+	Versions []string          `toml:"versions"`
+	Targets  []string          `toml:"targets"`
+	Labels   map[string]string `toml:"labels"`
 }
 
 func (p *Package) Default() {

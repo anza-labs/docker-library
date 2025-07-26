@@ -16,10 +16,28 @@ type Engine struct {
 	ManifestPush     []string
 }
 
-func (e *Engine) BuildCommand(registry, repository, name, os, arch, target, version string, mono bool) []string {
+func (e *Engine) BuildCommand(
+	registry, repository, name, os, arch, target, version string,
+	labels map[string]string,
+	mono bool,
+) []string {
 	full := path.Join(registry, repository, name)
 	if !mono {
 		full = path.Join(full, target)
+	}
+
+	labelsMerged := []string{}
+	for k, v := range labels {
+		labelsMerged = append(labelsMerged, fmt.Sprintf("--label=%s='%s'", k, v))
+	}
+
+	slices.Sort(labelsMerged)
+
+	if len(labelsMerged) > 0 {
+		e.Build = append(
+			e.Build,
+			labelsMerged...,
+		)
 	}
 
 	return slices.Concat(

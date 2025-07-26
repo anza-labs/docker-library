@@ -63,7 +63,7 @@ func Build(ctx context.Context, image, version, arch, target string) error {
 
 	cmd := eng.BuildCommand(
 		cfg.Registry.Name, cfg.Registry.Repository, image,
-		"linux", arch, target, version, true,
+		"linux", arch, target, version, make(map[string]string), true,
 	)
 
 	handle := exec.CommandContext(ctx, cmd[0], cmd[1:]...)

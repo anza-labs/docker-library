@@ -4,6 +4,7 @@ import (
 	"docker-library/internal/builder"
 	"docker-library/internal/config"
 	"fmt"
+	"maps"
 	"path"
 	"strings"
 )
@@ -85,10 +86,13 @@ func runBuild(name string, cfg *config.Config, pkg *config.Package) string {
 		Build: cfg.Engines[cfg.Use].Build,
 	}
 
+	labels := maps.Clone(cfg.Labels)
+	maps.Copy(labels, pkg.Labels)
+
 	return strings.Join(engine.BuildCommand(
 		cfg.Registry.Name, cfg.Registry.Repository, name, pkg.OS,
 		"${{ matrix.arch }}", "${{ matrix.target }}", "${{ matrix.version }}",
-		len(pkg.Targets) == 1,
+		labels, len(pkg.Targets) == 1,
 	), " \\\n    ")
 }
 
