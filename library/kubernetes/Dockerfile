@@ -7,7 +7,7 @@ RUN apk add --no-cache \
 
 FROM scratch AS base
 WORKDIR /
-COPY --from=build /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=static-deps /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 ENV GODEBUG=netdns=go,fips140=on
 ENV GOFIPS140=v1.0.0
 
