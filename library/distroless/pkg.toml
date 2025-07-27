@@ -11,5 +11,5 @@ arch = [
 
 targets = [
     "static",
-    "static-rootles",
+    "static-rootless",
 ]
