@@ -41,7 +41,7 @@ jobs:
           - riscv64
         target:
           - static
-          - static-rootles
+          - static-rootless
         version:
           - latest
   promote:
@@ -100,7 +100,7 @@ jobs:
       matrix:
         target:
           - static
-          - static-rootles
+          - static-rootless
         version:
           - latest
 name: release library/distroless
