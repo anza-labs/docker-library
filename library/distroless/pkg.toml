@@ -1,0 +1,15 @@
+versions = [
+    "latest",
+]
+
+arch = [
+    "amd64",
+    "arm64",
+    "ppc64le",
+    "riscv64",
+]
+
+targets = [
+    "static",
+    "static-rootles",
+]
