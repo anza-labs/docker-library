@@ -1,3 +1,4 @@
+ARG BASE_IMAGE
 FROM docker.io/library/alpine:3.22.1 AS probe
 
 # install some auxiliary packages
@@ -35,7 +36,7 @@ RUN wget "https://github.com/k3s-io/kine/releases/download/${VERSION}/kine-$(cat
     mv kine-* kine && \
     chmod +x kine
 
-FROM scratch AS image
+FROM ${BASE_IMAGE} AS image
 WORKDIR /
 COPY --from=alpine /workspace/kine /usr/local/bin/kine
 COPY --from=probe /workspace/grpc_health_probe /usr/local/bin/grpc_health_probe

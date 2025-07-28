@@ -24,6 +24,7 @@ jobs:
               --label=org.opencontainers.image.vendor='anza-labs' \
               --target=${{ matrix.target }} \
               --build-arg=VERSION=${{ matrix.version }} \
+              --build-arg=BASE_IMAGE=scratch \
               --platform=linux/${{ matrix.arch }} \
               --file=library/distroless/Dockerfile \
               --tag=ghcr.io/anza-labs/library/distroless/${{ matrix.target }}:${{ matrix.version }}-${{ matrix.arch }} \

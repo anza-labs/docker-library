@@ -17,7 +17,7 @@ type Engine struct {
 }
 
 func (e *Engine) BuildCommand(
-	registry, repository, name, os, arch, target, version string,
+	registry, repository, name, os, arch, target, version, baseImage string,
 	labels map[string]string,
 	mono bool,
 ) []string {
@@ -45,6 +45,7 @@ func (e *Engine) BuildCommand(
 		[]string{
 			fmt.Sprintf("--target=%s", target),
 			fmt.Sprintf("--build-arg=VERSION=%s", version),
+			fmt.Sprintf("--build-arg=BASE_IMAGE=%s", baseImage),
 			fmt.Sprintf("--platform=%s/%s", os, arch),
 			fmt.Sprintf("--file=%s", path.Join("./", name, "Dockerfile")),
 			fmt.Sprintf("--tag=%s:%s-%s", full, version, arch),

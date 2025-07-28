@@ -12,6 +12,7 @@ import (
 	"os"
 	"os/exec"
 	"path"
+	"strings"
 
 	"gopkg.in/yaml.v3"
 )
@@ -61,9 +62,14 @@ func Build(ctx context.Context, image, version, arch, target string) error {
 		Build: cfg.Engines[use].Build,
 	}
 
+	baseImage := os.Getenv("BASE_IMAGE")
+	if baseImage == "" {
+		baseImage = cfg.BaseImage
+	}
+
 	cmd := eng.BuildCommand(
 		cfg.Registry.Name, cfg.Registry.Repository, image,
-		"linux", arch, target, version, make(map[string]string), true,
+		"linux", arch, target, version, baseImage, make(map[string]string), true,
 	)
 
 	handle := exec.CommandContext(ctx, cmd[0], cmd[1:]...)
@@ -105,9 +111,35 @@ func Push(ctx context.Context, image, version, arch, target string) error {
 
 // Actions...
 func Actions(ctx context.Context) error {
+	actionsDir := ".github/workflows"
+
+	de, err := os.ReadDir(actionsDir)
+	if err != nil {
+		return err
+	}
+
+	for _, entry := range de {
+		select {
+		case <-ctx.Done():
+			return ctx.Err()
+		default:
+		}
+
+		if !strings.HasPrefix(entry.Name(), cfg.Workflow.Prefix) {
+			continue
+		}
+
+		name := path.Join(actionsDir, entry.Name())
+
+		err := os.Remove(name)
+		if err != nil {
+			return err
+		}
+	}
+
 	libdir := "library"
 
-	de, err := os.ReadDir(libdir)
+	de, err = os.ReadDir(libdir)
 	if err != nil {
 		return err
 	}

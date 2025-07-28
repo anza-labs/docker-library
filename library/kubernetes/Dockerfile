@@ -1,13 +1,8 @@
 ARG VERSION
+ARG BASE_IMAGE
 FROM --platform=$BUILDPLATFORM ghcr.io/anza-labs/library/kubernetes-sources:${VERSION} AS pre-build
 
-FROM --platform=$BUILDPLATFORM docker.io/library/alpine:3.22.1 AS static-deps
-RUN apk add --no-cache \
-        ca-certificates
-
-FROM scratch AS base
-WORKDIR /
-COPY --from=static-deps /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+FROM ${BASE_IMAGE} AS base
 ENV GODEBUG=netdns=go,fips140=on
 ENV GOFIPS140=v1.0.0
 

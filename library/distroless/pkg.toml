@@ -9,6 +9,8 @@ arch = [
     "riscv64",
 ]
 
+base_image = "scratch"
+
 targets = [
     "static",
     "static-rootless",

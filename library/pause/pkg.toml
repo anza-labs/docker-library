@@ -3,6 +3,8 @@ versions = [
     "3.9",
 ]
 
+base_image = "scratch"
+
 arch = [
     "amd64",
     "arm64",

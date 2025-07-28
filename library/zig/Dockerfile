@@ -1,4 +1,5 @@
-FROM docker.io/library/alpine:3.22.1 AS image
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE} AS image
 
 # install some auxiliary packages
 RUN apk add --no-cache \

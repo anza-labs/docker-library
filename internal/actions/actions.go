@@ -89,9 +89,15 @@ func runBuild(name string, cfg *config.Config, pkg *config.Package) string {
 	labels := maps.Clone(cfg.Labels)
 	maps.Copy(labels, pkg.Labels)
 
+	baseImage := pkg.BaseImage
+	if baseImage == "" {
+		baseImage = cfg.BaseImage
+	}
+
 	return strings.Join(engine.BuildCommand(
 		cfg.Registry.Name, cfg.Registry.Repository, name, pkg.OS,
 		"${{ matrix.arch }}", "${{ matrix.target }}", "${{ matrix.version }}",
+		baseImage,
 		labels, len(pkg.Targets) == 1,
 	), " \\\n    ")
 }

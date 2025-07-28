@@ -1,3 +1,4 @@
+ARG BASE_IMAGE
 FROM --platform=$BUILDPLATFORM ghcr.io/anza-labs/library/kubernetes-sources:v1.33.0 AS pre-build
 
 FROM docker.io/library/alpine:3.22.1 AS cbuild
@@ -17,7 +18,7 @@ ENV CFLAGS="-Os -Wall -Werror -static -DVERSION=v${VERSION}"
 RUN clang ${CFLAGS} pause.c -o pause && \
     strip pause
 
-FROM scratch AS image
+FROM ${BASE_IMAGE} AS image
 
 COPY --from=pause-build /src/pause /pause
 

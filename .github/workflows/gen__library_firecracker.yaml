@@ -24,6 +24,7 @@ jobs:
               --label=org.opencontainers.image.vendor='anza-labs' \
               --target=${{ matrix.target }} \
               --build-arg=VERSION=${{ matrix.version }} \
+              --build-arg=BASE_IMAGE=ghcr.io/anza-labs/library/distroless/static-nonroot:latest \
               --platform=linux/${{ matrix.arch }} \
               --file=library/firecracker/Dockerfile \
               --tag=ghcr.io/anza-labs/library/firecracker:${{ matrix.version }}-${{ matrix.arch }} \

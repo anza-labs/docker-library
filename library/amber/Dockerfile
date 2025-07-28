@@ -1,3 +1,4 @@
+ARG BASE_IMAGE
 FROM docker.io/library/alpine:3.22.1 AS image
 
 # select arch

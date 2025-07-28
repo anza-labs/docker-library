@@ -1,3 +1,4 @@
+ARG BASE_IMAGE
 FROM docker.io/library/golang:1.24-alpine AS build
 
 RUN go install github.com/u-root/gobusybox/src/cmd/makebb@latest
@@ -17,7 +18,7 @@ RUN makebb \
         cmds/exp/\* && \
     /tmp/read-links.sh /src/bb
 
-FROM scratch AS image
+FROM ${BASE_IMAGE} AS image
 COPY --from=build /src/bb /bin/bb
 COPY --from=build /src/bubble-sh.history /tmp/bubble-sh.history
 COPY --from=build /tmp/bb_cmds.txt /tmp/bb_cmds.txt

@@ -1,4 +1,5 @@
-FROM docker.io/library/golang:1.24 AS image
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE} AS image
 
 ARG VERSION
 

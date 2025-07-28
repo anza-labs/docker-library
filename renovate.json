@@ -35,7 +35,8 @@
         "/pkg.toml$/"
       ],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+\"(?<currentValue>\\S+)\""
+        "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+\"(?<currentValue>\\S+)\"",
+        "# renovate: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))?\\sbase_image = \"(?<depName>.*?):(?<currentValue>\\S+)\""
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
     }

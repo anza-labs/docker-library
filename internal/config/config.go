@@ -29,15 +29,20 @@ func Load(file string, v Defaulter) error {
 }
 
 type Config struct {
-	Use      string             `toml:"use"`
-	Labels   map[string]string  `toml:"labels"`
-	Registry *Registry          `toml:"registry"`
-	Workflow *Workflow          `toml:"workflow"`
-	Engines  map[string]*Engine `toml:"engine"`
+	Use       string             `toml:"use"`
+	BaseImage string             `toml:"base_image"`
+	Labels    map[string]string  `toml:"labels"`
+	Registry  *Registry          `toml:"registry"`
+	Workflow  *Workflow          `toml:"workflow"`
+	Engines   map[string]*Engine `toml:"engine"`
 }
 
 func (c *Config) Default() {
 	c.Registry.Default()
+
+	if c.BaseImage == "" {
+		c.BaseImage = "ghcr.io/anza-labs/library/distroless/static-nonroot:latest"
+	}
 }
 
 type Registry struct {
@@ -89,11 +94,12 @@ type Manifest struct {
 }
 
 type Package struct {
-	OS       string            `toml:"os"`
-	Arch     []string          `toml:"arch"`
-	Versions []string          `toml:"versions"`
-	Targets  []string          `toml:"targets"`
-	Labels   map[string]string `toml:"labels"`
+	OS        string            `toml:"os"`
+	BaseImage string            `toml:"base_image"`
+	Arch      []string          `toml:"arch"`
+	Versions  []string          `toml:"versions"`
+	Targets   []string          `toml:"targets"`
+	Labels    map[string]string `toml:"labels"`
 }
 
 func (p *Package) Default() {

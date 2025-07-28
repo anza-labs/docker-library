@@ -1,3 +1,4 @@
+ARG BASE_IMAGE
 FROM docker.io/library/alpine:3.22.1 AS build
 
 ARG VERSION
@@ -13,7 +14,7 @@ RUN wget "https://ftpmirror.gnu.org/bc/bc-${VERSION}.tar.gz" && \
     ./configure CC="clang -static" && \
     make
 
-FROM scratch AS image
+FROM ${BASE_IMAGE} AS image
 
 COPY --from=build /build/bc/bc/bc /usr/bin/bc
 

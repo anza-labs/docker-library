@@ -1,3 +1,4 @@
+ARG BASE_IMAGE
 FROM --platform=$BUILDPLATFORM docker.io/library/alpine:edge AS static-deps
 
 ARG VERSION
@@ -21,7 +22,7 @@ RUN echo "root:x:0:0:root:/root:/sbin/nologin" > /nonroot/etc/passwd && \
     echo "nonroot:x:65532:65532:nonroot:/:/sbin/nologin" >> /nonroot/etc/passwd && \
     echo "nonroot:x:65532:nonroot" >> /nonroot/etc/group
 
-FROM scratch AS static
+FROM ${BASE_IMAGE} AS static
 COPY --from=static-deps /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=static-deps /nonroot /
 
