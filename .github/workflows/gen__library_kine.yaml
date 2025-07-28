@@ -24,7 +24,7 @@ jobs:
               --label=org.opencontainers.image.vendor='anza-labs' \
               --target=${{ matrix.target }} \
               --build-arg=VERSION=${{ matrix.version }} \
-              --build-arg=BASE_IMAGE=ghcr.io/anza-labs/library/distroless/static-nonroot:latest \
+              --build-arg=BASE_IMAGE=ghcr.io/anza-labs/library/distroless/static-rootless:latest \
               --platform=linux/${{ matrix.arch }} \
               --file=library/kine/Dockerfile \
               --tag=ghcr.io/anza-labs/library/kine:${{ matrix.version }}-${{ matrix.arch }} \

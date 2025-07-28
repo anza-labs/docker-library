@@ -41,7 +41,7 @@ func (c *Config) Default() {
 	c.Registry.Default()
 
 	if c.BaseImage == "" {
-		c.BaseImage = "ghcr.io/anza-labs/library/distroless/static-nonroot:latest"
+		c.BaseImage = "ghcr.io/anza-labs/library/distroless/static-rootless:latest"
 	}
 }
 

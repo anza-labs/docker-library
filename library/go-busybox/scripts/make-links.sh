@@ -1,7 +1,7 @@
 #!/bin/gosh
 
-BB_BIN="/bin/bb"
-BIN_DIR="/bin"
+BB_BIN="/usr/bin/bb"
+BIN_DIR="/usr/bin"
 CMD_FILE="/tmp/bb_cmds.txt"
 
 # Ensure command file exists
