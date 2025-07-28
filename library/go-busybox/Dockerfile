@@ -19,14 +19,14 @@ RUN makebb \
     /tmp/read-links.sh /src/bb
 
 FROM ${BASE_IMAGE} AS image
-COPY --from=build /src/bb /usr/bin/bb
+COPY --from=build /src/bb /bin/bb
 COPY --from=build /src/bubble-sh.history /tmp/bubble-sh.history
 COPY --from=build /tmp/bb_cmds.txt /tmp/bb_cmds.txt
 COPY ./scripts/make-links.sh /tmp/make-links.sh
 
-SHELL ["/usr/bin/bb", "gosh", "-c"]
-RUN /bin/bb ln -s /usr/bin/bb /usr/bin/gosh && \
+SHELL ["/bin/bb", "gosh", "-c"]
+RUN /bin/bb ln -s /bin/bb /bin/gosh && \
     /tmp/make-links.sh && \
     rm /tmp/make-links.sh && \
     rm /tmp/bb_cmds.txt
-CMD /usr/bin/gosh
+CMD /bin/gosh

@@ -1,7 +1,8 @@
 #!/bin/gosh
+# shellcheck shell=sh
 
-BB_BIN="/usr/bin/bb"
-BIN_DIR="/usr/bin"
+BB_BIN="/bin/bb"
+BIN_DIR="/bin"
 CMD_FILE="/tmp/bb_cmds.txt"
 
 # Ensure command file exists

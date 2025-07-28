@@ -1,14 +1,11 @@
 ARG BASE_IMAGE
 FROM docker.io/library/alpine:3.22.1 AS probe
 
-# install some auxiliary packages
-RUN apk add --no-cache \
-    git make pkgconf
-
 # select arch
 RUN echo $(case "$(uname -m)" in \
         x86_64|amd64) echo amd64 ;;\
         aarch64|arm64) echo arm64 ;;\
+        riscv64) echo riscv64 ;;\
         *) echo "unsupported" ;;\
     esac) > /tmp/arch
 
@@ -26,6 +23,7 @@ FROM docker.io/library/alpine:3.22.1 AS alpine
 RUN echo $(case "$(uname -m)" in \
         x86_64|amd64) echo amd64 ;;\
         aarch64|arm64) echo arm64 ;;\
+        riscv64) echo riscv64 ;;\
         *) echo "unsupported" ;;\
     esac) > /tmp/arch
 

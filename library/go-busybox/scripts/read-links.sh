@@ -1,4 +1,5 @@
 #!/bin/sh
+# shellcheck shell=sh
 
 BB_BIN="${1}"
 CMD_FILE="/tmp/bb_cmds.txt"
