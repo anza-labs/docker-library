@@ -3,6 +3,9 @@ versions = [
     "c2b9e48e151e8efeab13029a9bcf9236eae176ca",
 ]
 
+# renovate: datasource=docker
+base_image = "ghcr.io/anza-labs/library/distroless/static:latest"
+
 arch = [
     "amd64",
     "arm64",
