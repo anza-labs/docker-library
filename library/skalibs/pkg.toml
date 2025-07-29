@@ -1,0 +1,12 @@
+versions = [
+# renovate: datasource=github-tags depName=skarnet/skalibs
+    "v2.14.4.0",
+]
+
+base_image = "scratch"
+
+arch = [
+    "amd64",
+    "arm64",
+    "riscv64",
+]

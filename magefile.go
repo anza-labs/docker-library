@@ -45,7 +45,7 @@ func write(name string, content any) error {
 }
 
 // Build...
-func Build(ctx context.Context, image, version, arch, target string) error {
+func Build(ctx context.Context, image, arch, target string) error {
 	pkg := &config.Package{}
 
 	if err := config.Load(path.Join(image, "pkg.toml"), pkg); err != nil {
@@ -62,14 +62,14 @@ func Build(ctx context.Context, image, version, arch, target string) error {
 		Build: cfg.Engines[use].Build,
 	}
 
-	baseImage := os.Getenv("BASE_IMAGE")
+	baseImage := pkg.BaseImage
 	if baseImage == "" {
 		baseImage = cfg.BaseImage
 	}
 
 	cmd := eng.BuildCommand(
 		cfg.Registry.Name, cfg.Registry.Repository, image,
-		"linux", arch, target, version, baseImage, make(map[string]string), true,
+		"linux", arch, target, pkg.Versions[0], baseImage, make(map[string]string), true,
 	)
 
 	handle := exec.CommandContext(ctx, cmd[0], cmd[1:]...)
