@@ -1,0 +1,12 @@
+versions = [
+# renovate: datasource=github-tags depName=skarnet/execline
+    "v2.9.7.0",
+]
+
+base_image = "scratch"
+
+arch = [
+    "amd64",
+    "arm64",
+    "riscv64",
+]
