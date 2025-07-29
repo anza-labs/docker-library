@@ -47,7 +47,7 @@ jobs:
           - kubectl
           - kubelet
         version:
-          - v1.33.0
+          - v1.33.3
   promote:
     env: {}
     needs: build
@@ -103,7 +103,7 @@ jobs:
           - kubectl
           - kubelet
         version:
-          - v1.33.0
+          - v1.33.3
 name: release library/kubernetes
 "on":
   push:
