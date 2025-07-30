@@ -15,7 +15,6 @@ jobs:
           docker \
               buildx \
               build \
-              --pull \
               --load \
               --label=org.opencontainers.image.authors='anza-labs contributors' \
               --label=org.opencontainers.image.created='${{ github.event.created_at }}' \
