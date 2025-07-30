@@ -3,7 +3,8 @@ versions = [
     "v2.14.4.0",
 ]
 
-base_image = "scratch"
+# renovate: datasource=docker
+base_image = "ghcr.io/anza-labs/library/distroless/musl:latest"
 
 arch = [
     "amd64",

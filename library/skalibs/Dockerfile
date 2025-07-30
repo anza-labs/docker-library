@@ -1,10 +1,13 @@
 ARG BASE_IMAGE
-FROM ghcr.io/anza-labs/library/skalibs:v2.14.4.0 AS skalibs
+FROM ghcr.io/anza-labs/library/musl:v1.2.5 AS musl-dist
 FROM docker.io/library/alpine:3.22.1 AS build
 
 # install some auxiliary packages
 RUN apk add --no-cache \
-    git make pkgconf clang
+    clang git make pkgconf
+
+# ensure that proper musl is available
+COPY --from=musl-dist / /
 
 ARG VERSION
 
@@ -20,7 +23,6 @@ WORKDIR /src/skalibs
 RUN ./configure && \
     make && \
     make strip && \
-    mkdir -p /dist && \
     make install DESTDIR=/dist
 
 FROM ${BASE_IMAGE} AS image
