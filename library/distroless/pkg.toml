@@ -14,4 +14,6 @@ base_image = "scratch"
 targets = [
     "static",
     "static-rootless",
+    "musl",
+    "musl-rootless",
 ]

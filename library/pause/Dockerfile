@@ -13,7 +13,7 @@ FROM cbuild AS pause-build
 COPY --from=pre-build /src/build/pause/linux/pause.c /src/pause.c
 
 ARG VERSION
-ENV CFLAGS="-Os -Wall -Werror -static -DVERSION=v${VERSION}"
+ENV CFLAGS="-Os -Wall -Werror -static -DVERSION=${VERSION}"
 
 RUN clang ${CFLAGS} pause.c -o pause && \
     strip pause

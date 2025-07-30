@@ -11,20 +11,40 @@ RUN apk add --no-cache \
         ca-certificates="${CA_CERTIFICATES_VERSION}"
 
 # Create directories for target layout
-RUN mkdir -p /nonroot/etc && \
-    mkdir -p /nonroot/run && \
-    mkdir -p /nonroot/tmp
+RUN mkdir -p /dist/etc && \
+    mkdir -p /dist/run && \
+    mkdir -p /dist/tmp
 
-# Create a non-root user and group for rootless operation
-# This user will have UID and GID 65532, which is the default for rootless containers
-RUN echo "root:x:0:0:root:/root:/sbin/nologin" > /nonroot/etc/passwd && \
-    echo "root:x:0:root" > /nonroot/etc/group && \
-    echo "nonroot:x:65532:65532:nonroot:/:/sbin/nologin" >> /nonroot/etc/passwd && \
-    echo "nonroot:x:65532:nonroot" >> /nonroot/etc/group
+RUN cat <<'EOF' > /dist/etc/passwd
+root:x:0:0:root:/root:/sbin/nologin
+nonroot:x:65532:65532:nonroot:/:/sbin/nologin
+EOF
+
+RUN cat <<'EOF' > /dist/etc/group
+root:x:0:
+tty:x:5:
+floppy:x:6:
+disk:x:7:
+cdrom:x:8:
+audio:x:9:
+video:x:10:
+dialout:x:20:
+kvm:x:78:
+nonroot:x:65532:
+EOF
 
 FROM ${BASE_IMAGE} AS static
 COPY --from=static-deps /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=static-deps /nonroot /
+COPY --from=static-deps /dist /
 
 FROM static AS static-rootless
+USER 65532:65532
+
+FROM ghcr.io/anza-labs/library/musl:v1.2.5 AS musl-dist
+FROM ${BASE_IMAGE} AS musl
+COPY --from=musl-dist / /
+COPY --from=static-deps /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
+COPY --from=static-deps /dist /
+
+FROM musl AS musl-rootless
 USER 65532:65532
