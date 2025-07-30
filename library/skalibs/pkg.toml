@@ -1,5 +1,5 @@
 versions = [
-# renovate: datasource=github-tags depName=skarnet/skalibs
+# renovate: datasource=github-tags depName=skarnet/skalibs versioning=loose
     "v2.14.4.0",
 ]
 

@@ -1,5 +1,5 @@
 versions = [ 
-# renovate: datasource=docker depName=registry.k8s.io/pause
+# renovate: datasource=docker depName=registry.k8s.io/pause versioning=loose
     "3.9",
 ]
 
