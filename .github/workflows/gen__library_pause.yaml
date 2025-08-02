@@ -43,7 +43,7 @@ jobs:
         target:
           - image
         version:
-          - "3.9"
+          - 3.10.1
   promote:
     env: {}
     needs: build
@@ -101,7 +101,7 @@ jobs:
         target:
           - image
         version:
-          - "3.9"
+          - 3.10.1
 name: release library/pause
 "on":
   push:
