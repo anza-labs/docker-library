@@ -24,7 +24,7 @@ jobs:
               --label=org.opencontainers.image.vendor='anza-labs' \
               --target=${{ matrix.target }} \
               --build-arg=VERSION=${{ matrix.version }} \
-              --build-arg=BASE_IMAGE=docker.io/library/alpine:3.22.1 \
+              --build-arg=BASE_IMAGE=docker.io/library/golang:1.24-alpine \
               --platform=linux/${{ matrix.arch }} \
               --file=library/kubernetes-sources/Dockerfile \
               --tag=ghcr.io/anza-labs/library/kubernetes-sources:${{ matrix.version }}-${{ matrix.arch }} \
