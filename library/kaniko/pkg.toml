@@ -1,0 +1,19 @@
+versions = [
+# renovate: datasource=github-tags depName=chainguard-dev/kaniko
+    "v1.25.1",
+]
+
+# renovate: datasource=docker
+base_image = "ghcr.io/anza-labs/library/distroless/static:latest"
+
+arch = [
+    "amd64",
+    "arm64",
+    "riscv64",
+]
+
+targets = [
+    "executor",
+    "executor-debug",
+    "warmer",
+]
