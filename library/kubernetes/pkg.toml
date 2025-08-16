@@ -1,6 +1,6 @@
 versions = [ 
 # renovate: datasource=docker depName=ghcr.io/anza-labs/library/kubernetes-sources
-    "v1.33.3",
+    "v1.33.4",
 ]
 
 arch = [
