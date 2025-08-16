@@ -1,5 +1,5 @@
 ARG BASE_IMAGE
-FROM docker.io/library/golang:1.24-alpine AS build
+FROM docker.io/library/golang:1.25-alpine AS build
 
 # install some auxiliary packages
 RUN apk add --no-cache \
