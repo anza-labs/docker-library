@@ -42,7 +42,7 @@ jobs:
         target:
           - image
         version:
-          - v1.33.3
+          - v1.33.4
   promote:
     env: {}
     needs: build
@@ -93,7 +93,7 @@ jobs:
         target:
           - image
         version:
-          - v1.33.3
+          - v1.33.4
 name: release library/kubernetes-sources
 "on":
   push:
