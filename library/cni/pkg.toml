@@ -1,0 +1,12 @@
+versions = [ 
+# renovate: datasource=github-tags depName=containernetworking/plugins
+    "v1.7.1",
+]
+
+base_image = "scratch"
+
+arch = [
+    "amd64",
+    "arm64",
+    "riscv64",
+]
