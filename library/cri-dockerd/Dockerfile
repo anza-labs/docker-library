@@ -20,4 +20,6 @@ FROM ${BASE_IMAGE} AS image
 COPY --from=cni / /
 COPY --from=build /src/cri-dockerd/cri-dockerd /usr/local/bin/cri-dockerd
 
+ENV PATH=/bin:/usr/bin:/usr/local/bin:/opt/cni/bin
+
 ENTRYPOINT [ "/usr/local/bin/cri-dockerd" ]
