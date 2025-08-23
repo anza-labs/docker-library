@@ -1,6 +1,6 @@
 versions = [
 # renovate: datasource=github-tags depName=ziglang/zig
-    "0.14.1",
+    "0.15.1",
 ]
 
 # renovate: datasource=docker
