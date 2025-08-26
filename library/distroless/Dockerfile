@@ -1,4 +1,27 @@
 ARG BASE_IMAGE
+FROM docker.io/library/alpine:3.22.1 AS musl-deps
+
+# install some auxiliary packages
+RUN apk add --no-cache \
+    clang git linux-headers make pkgconf
+
+# renovate: datasource=git-tags depName=git://git.musl-libc.org/musl
+ARG MUSL_VERSION=v1.2.5
+
+WORKDIR /src
+
+RUN wget "https://musl.libc.org/releases/musl-${MUSL_VERSION#v}.tar.gz" && \
+    tar -xf musl-${MUSL_VERSION#v}.tar.gz && \
+    mv musl-${MUSL_VERSION#v} /src/musl && \
+    rm -rf musl-${MUSL_VERSION#v}.tar.gz
+
+WORKDIR /src/musl
+
+RUN mkdir -p /dist && \
+    ./configure && \
+    make && \
+    make install DESTDIR=/dist
+
 FROM --platform=$BUILDPLATFORM docker.io/library/alpine:edge AS static-deps
 
 ARG VERSION
@@ -42,7 +65,7 @@ USER 65532:65532
 
 FROM ghcr.io/anza-labs/library/musl:v1.2.5 AS musl-dist
 FROM ${BASE_IMAGE} AS musl
-COPY --from=musl-dist / /
+COPY --from=musl-deps /dist /
 COPY --from=static-deps /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=static-deps /dist /
 

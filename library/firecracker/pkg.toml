@@ -1,8 +1,0 @@
-versions = [
-# renovate: datasource=github-tags depName=firecracker-microvm/firecracker
-    "v1.12.1",
-]
-arch = [
-    "amd64",
-    "arm64",
-]
