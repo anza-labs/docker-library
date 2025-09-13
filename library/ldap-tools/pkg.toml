@@ -1,0 +1,12 @@
+versions = [
+    "latest",
+]
+
+arch = [
+    "amd64",
+    "arm64",
+    "riscv64",
+]
+
+# renovate: datasource=docker
+base_image = "docker.io/library/alpine:edge"
