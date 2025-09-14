@@ -38,7 +38,6 @@ jobs:
         arch:
           - amd64
           - arm64
-          - riscv64
         target:
           - executor
           - executor-debug
@@ -64,8 +63,7 @@ jobs:
               --amend \
               ghcr.io/anza-labs/library/kaniko/${{ matrix.target }}:${{ matrix.version }} \
               ghcr.io/anza-labs/library/kaniko/${{ matrix.target }}:${{ matrix.version }}-amd64 \
-              ghcr.io/anza-labs/library/kaniko/${{ matrix.target }}:${{ matrix.version }}-arm64 \
-              ghcr.io/anza-labs/library/kaniko/${{ matrix.target }}:${{ matrix.version }}-riscv64
+              ghcr.io/anza-labs/library/kaniko/${{ matrix.target }}:${{ matrix.version }}-arm64
       - run: |-
           docker \
               manifest \
@@ -78,13 +76,7 @@ jobs:
               annotate \
               --arch=arm64 \
               ghcr.io/anza-labs/library/kaniko/${{ matrix.target }}:${{ matrix.version }} \
-              ghcr.io/anza-labs/library/kaniko/${{ matrix.target }}:${{ matrix.version }}-arm64 && \
-          docker \
-              manifest \
-              annotate \
-              --arch=riscv64 \
-              ghcr.io/anza-labs/library/kaniko/${{ matrix.target }}:${{ matrix.version }} \
-              ghcr.io/anza-labs/library/kaniko/${{ matrix.target }}:${{ matrix.version }}-riscv64
+              ghcr.io/anza-labs/library/kaniko/${{ matrix.target }}:${{ matrix.version }}-arm64
       - run: |-
           docker \
               manifest \
