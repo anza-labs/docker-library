@@ -34,7 +34,8 @@ jobs:
               push \
               ghcr.io/anza-labs/library/kaniko/${{ matrix.target }}:${{ matrix.version }}-${{ matrix.arch }}
       - uses: sigstore/cosign-installer@v3.9.2
-      - run: |-
+      - if: ${{ matrix.version != 'latest' }}
+        run: |-
           cosign \
               sign \
               --yes \
@@ -89,7 +90,8 @@ jobs:
               push \
               ghcr.io/anza-labs/library/kaniko/${{ matrix.target }}:${{ matrix.version }}
       - uses: sigstore/cosign-installer@v3.9.2
-      - run: |-
+      - if: ${{ matrix.version != 'latest' }}
+        run: |-
           cosign \
               sign \
               --yes \

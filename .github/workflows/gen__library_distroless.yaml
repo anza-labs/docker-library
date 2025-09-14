@@ -34,7 +34,8 @@ jobs:
               push \
               ghcr.io/anza-labs/library/distroless/${{ matrix.target }}:${{ matrix.version }}-${{ matrix.arch }}
       - uses: sigstore/cosign-installer@v3.9.2
-      - run: |-
+      - if: ${{ matrix.version != 'latest' }}
+        run: |-
           cosign \
               sign \
               --yes \
@@ -44,6 +45,7 @@ jobs:
         arch:
           - amd64
           - arm64
+          - ppc64le
           - riscv64
         target:
           - static
@@ -72,6 +74,7 @@ jobs:
               ghcr.io/anza-labs/library/distroless/${{ matrix.target }}:${{ matrix.version }} \
               ghcr.io/anza-labs/library/distroless/${{ matrix.target }}:${{ matrix.version }}-amd64 \
               ghcr.io/anza-labs/library/distroless/${{ matrix.target }}:${{ matrix.version }}-arm64 \
+              ghcr.io/anza-labs/library/distroless/${{ matrix.target }}:${{ matrix.version }}-ppc64le \
               ghcr.io/anza-labs/library/distroless/${{ matrix.target }}:${{ matrix.version }}-riscv64
       - run: |-
           docker \
@@ -89,6 +92,12 @@ jobs:
           docker \
               manifest \
               annotate \
+              --arch=ppc64le \
+              ghcr.io/anza-labs/library/distroless/${{ matrix.target }}:${{ matrix.version }} \
+              ghcr.io/anza-labs/library/distroless/${{ matrix.target }}:${{ matrix.version }}-ppc64le && \
+          docker \
+              manifest \
+              annotate \
               --arch=riscv64 \
               ghcr.io/anza-labs/library/distroless/${{ matrix.target }}:${{ matrix.version }} \
               ghcr.io/anza-labs/library/distroless/${{ matrix.target }}:${{ matrix.version }}-riscv64
@@ -98,7 +107,8 @@ jobs:
               push \
               ghcr.io/anza-labs/library/distroless/${{ matrix.target }}:${{ matrix.version }}
       - uses: sigstore/cosign-installer@v3.9.2
-      - run: |-
+      - if: ${{ matrix.version != 'latest' }}
+        run: |-
           cosign \
               sign \
               --yes \

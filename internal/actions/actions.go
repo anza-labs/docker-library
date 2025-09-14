@@ -190,6 +190,7 @@ func Release(name string, cfg *config.Config, pkg *config.Package) (map[string]a
 						"uses": actions["actionCosignInstaller"],
 					},
 					{
+						"if":  "${{ matrix.version != 'latest' }}",
 						"run": runSign(name, cfg, pkg),
 					},
 				},
@@ -229,6 +230,7 @@ func Release(name string, cfg *config.Config, pkg *config.Package) (map[string]a
 						"uses": actions["actionCosignInstaller"],
 					},
 					{
+						"if":  "${{ matrix.version != 'latest' }}",
 						"run": runManifestSign(name, cfg, pkg),
 					},
 				},
