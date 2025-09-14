@@ -9,7 +9,6 @@ base_image = "ghcr.io/anza-labs/library/distroless/static:latest"
 arch = [
     "amd64",
     "arm64",
-    "riscv64",
 ]
 
 targets = [
