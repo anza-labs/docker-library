@@ -33,6 +33,12 @@ jobs:
           docker \
               push \
               ghcr.io/anza-labs/library/kubernetes-sources:${{ matrix.version }}-${{ matrix.arch }}
+      - uses: sigstore/cosign-installer@v3.9.2
+      - run: |-
+          cosign \
+              sign \
+              --keyless \
+              ghcr.io/anza-labs/library/kubernetes-sources:${{ matrix.version }}-${{ matrix.arch }}
     strategy:
       matrix:
         arch:
@@ -88,6 +94,12 @@ jobs:
               manifest \
               push \
               ghcr.io/anza-labs/library/kubernetes-sources:${{ matrix.version }}
+      - uses: sigstore/cosign-installer@v3.9.2
+      - run: |-
+          cosign \
+              sign \
+              --keyless \
+              ghcr.io/anza-labs/library/kubernetes-sources:${{ matrix.version }}
     strategy:
       matrix:
         target:
@@ -102,6 +114,7 @@ name: release library/kubernetes-sources
     paths:
       - .github/workflows/gen__library_kubernetes-sources.yaml
       - library/kubernetes-sources/Dockerfile
+      - library/kubernetes-sources/pkg.toml
   workflow_dispatch: {}
 permissions:
   contents: write

@@ -33,6 +33,12 @@ jobs:
           docker \
               push \
               ghcr.io/anza-labs/library/pause:${{ matrix.version }}-${{ matrix.arch }}
+      - uses: sigstore/cosign-installer@v3.9.2
+      - run: |-
+          cosign \
+              sign \
+              --keyless \
+              ghcr.io/anza-labs/library/pause:${{ matrix.version }}-${{ matrix.arch }}
     strategy:
       matrix:
         arch:
@@ -96,6 +102,12 @@ jobs:
               manifest \
               push \
               ghcr.io/anza-labs/library/pause:${{ matrix.version }}
+      - uses: sigstore/cosign-installer@v3.9.2
+      - run: |-
+          cosign \
+              sign \
+              --keyless \
+              ghcr.io/anza-labs/library/pause:${{ matrix.version }}
     strategy:
       matrix:
         target:
@@ -110,6 +122,7 @@ name: release library/pause
     paths:
       - .github/workflows/gen__library_pause.yaml
       - library/pause/Dockerfile
+      - library/pause/pkg.toml
   workflow_dispatch: {}
 permissions:
   contents: write

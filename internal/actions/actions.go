@@ -115,6 +115,26 @@ func runPush(name string, cfg *config.Config, pkg *config.Package) string {
 	), " \\\n    ")
 }
 
+func runSign(name string, cfg *config.Config, pkg *config.Package) string {
+	cosign := &builder.Cosign{}
+
+	return strings.Join(cosign.SignImageCommand(
+		cfg.Registry.Name, cfg.Registry.Repository, name,
+		"${{ matrix.arch }}", "${{ matrix.target }}", "${{ matrix.version }}",
+		len(pkg.Targets) == 1,
+	), " \\\n    ")
+}
+
+func runManifestSign(name string, cfg *config.Config, pkg *config.Package) string {
+	cosign := &builder.Cosign{}
+
+	return strings.Join(cosign.SignImageCommand(
+		cfg.Registry.Name, cfg.Registry.Repository, name,
+		"", "${{ matrix.target }}", "${{ matrix.version }}",
+		len(pkg.Targets) == 1,
+	), " \\\n    ")
+}
+
 func Release(name string, cfg *config.Config, pkg *config.Package) (map[string]any, error) {
 	return map[string]any{
 		"name": fmt.Sprintf("release %s", name),
@@ -125,6 +145,7 @@ func Release(name string, cfg *config.Config, pkg *config.Package) (map[string]a
 					path.Join(".github/workflows",
 						fmt.Sprintf("%s_%s.yaml", cfg.Workflow.Prefix, strings.ReplaceAll(name, "/", "_"))),
 					path.Join(name, "Dockerfile"),
+					path.Join(name, "pkg.toml"),
 				},
 			},
 			"workflow_dispatch": struct{}{},
@@ -164,6 +185,12 @@ func Release(name string, cfg *config.Config, pkg *config.Package) (map[string]a
 					{
 						"run": runPush(name, cfg, pkg),
 					},
+					{
+						"uses": actions["actionCosignInstaller"],
+					},
+					{
+						"run": runSign(name, cfg, pkg),
+					},
 				},
 			},
 			"promote": map[string]any{
@@ -196,6 +223,12 @@ func Release(name string, cfg *config.Config, pkg *config.Package) (map[string]a
 					},
 					{
 						"run": runManifestPush(name, cfg, pkg),
+					},
+					{
+						"uses": actions["actionCosignInstaller"],
+					},
+					{
+						"run": runManifestSign(name, cfg, pkg),
 					},
 				},
 			},

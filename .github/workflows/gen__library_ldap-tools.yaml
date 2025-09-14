@@ -33,6 +33,12 @@ jobs:
           docker \
               push \
               ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }}-${{ matrix.arch }}
+      - uses: sigstore/cosign-installer@v3.9.2
+      - run: |-
+          cosign \
+              sign \
+              --keyless \
+              ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }}-${{ matrix.arch }}
     strategy:
       matrix:
         arch:
@@ -88,6 +94,12 @@ jobs:
               manifest \
               push \
               ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }}
+      - uses: sigstore/cosign-installer@v3.9.2
+      - run: |-
+          cosign \
+              sign \
+              --keyless \
+              ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }}
     strategy:
       matrix:
         target:
@@ -102,6 +114,7 @@ name: release library/ldap-tools
     paths:
       - .github/workflows/gen__library_ldap-tools.yaml
       - library/ldap-tools/Dockerfile
+      - library/ldap-tools/pkg.toml
   workflow_dispatch: {}
 permissions:
   contents: write

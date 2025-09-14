@@ -33,6 +33,12 @@ jobs:
           docker \
               push \
               ghcr.io/anza-labs/library/amber:${{ matrix.version }}-${{ matrix.arch }}
+      - uses: sigstore/cosign-installer@v3.9.2
+      - run: |-
+          cosign \
+              sign \
+              --keyless \
+              ghcr.io/anza-labs/library/amber:${{ matrix.version }}-${{ matrix.arch }}
     strategy:
       matrix:
         arch:
@@ -72,6 +78,12 @@ jobs:
               manifest \
               push \
               ghcr.io/anza-labs/library/amber:${{ matrix.version }}
+      - uses: sigstore/cosign-installer@v3.9.2
+      - run: |-
+          cosign \
+              sign \
+              --keyless \
+              ghcr.io/anza-labs/library/amber:${{ matrix.version }}
     strategy:
       matrix:
         target:
@@ -86,6 +98,7 @@ name: release library/amber
     paths:
       - .github/workflows/gen__library_amber.yaml
       - library/amber/Dockerfile
+      - library/amber/pkg.toml
   workflow_dispatch: {}
 permissions:
   contents: write
