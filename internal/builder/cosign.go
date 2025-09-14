@@ -21,7 +21,7 @@ func (c *Cosign) SignImageCommand(registry, repository, name, arch, target, vers
 	return []string{
 		"cosign",
 		"sign",
-		"--keyless",
+		"--yes",
 		fmt.Sprintf("%s:%s", full, tag),
 	}
 }

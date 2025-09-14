@@ -37,7 +37,7 @@ jobs:
       - run: |-
           cosign \
               sign \
-              --keyless \
+              --yes \
               ghcr.io/anza-labs/library/zig:${{ matrix.version }}-${{ matrix.arch }}
     strategy:
       matrix:
@@ -106,7 +106,7 @@ jobs:
       - run: |-
           cosign \
               sign \
-              --keyless \
+              --yes \
               ghcr.io/anza-labs/library/zig:${{ matrix.version }}
     strategy:
       matrix:
@@ -126,4 +126,5 @@ name: release library/zig
   workflow_dispatch: {}
 permissions:
   contents: write
+  id-token: write
   packages: write

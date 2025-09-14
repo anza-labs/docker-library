@@ -153,6 +153,7 @@ func Release(name string, cfg *config.Config, pkg *config.Package) (map[string]a
 		"permissions": map[string]string{
 			"contents": "write",
 			"packages": "write",
+			"id-token": "write",
 		},
 		"jobs": map[string]any{
 			"build": map[string]any{
