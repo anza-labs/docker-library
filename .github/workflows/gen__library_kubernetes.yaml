@@ -33,7 +33,7 @@ jobs:
           docker \
               push \
               ghcr.io/anza-labs/library/kubernetes/${{ matrix.target }}:${{ matrix.version }}-${{ matrix.arch }}
-      - uses: sigstore/cosign-installer@v3.9.2
+      - uses: sigstore/cosign-installer@v3.10.0
       - if: ${{ matrix.version != 'latest' }}
         run: |-
           cosign \
@@ -100,7 +100,7 @@ jobs:
               manifest \
               push \
               ghcr.io/anza-labs/library/kubernetes/${{ matrix.target }}:${{ matrix.version }}
-      - uses: sigstore/cosign-installer@v3.9.2
+      - uses: sigstore/cosign-installer@v3.10.0
       - if: ${{ matrix.version != 'latest' }}
         run: |-
           cosign \
