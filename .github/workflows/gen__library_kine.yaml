@@ -49,7 +49,7 @@ jobs:
         target:
           - image
         version:
-          - v0.14.1
+          - v0.14.2
   promote:
     env: {}
     needs: build
@@ -107,7 +107,7 @@ jobs:
         target:
           - image
         version:
-          - v0.14.1
+          - v0.14.2
 name: release library/kine
 "on":
   push:
