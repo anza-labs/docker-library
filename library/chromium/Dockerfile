@@ -3,8 +3,8 @@ FROM ${BASE_IMAGE} AS image
 
 ARG VERSION
 
-# renovate: datasource=repology depName=alpine_edge/ttf-freefont versioning=loose
-ARG TTF_FREEFONT_VERSION=20120503-r4
+# renovate: datasource=repology depName=alpine_edge/font-freefont versioning=loose
+ARG FONT_FREEFONT_VERSION=20120503-r4
 
 # renovate: datasource=repology depName=alpine_edge/font-noto-emoji versioning=loose
 ARG FONT_NOTO_EMOJI_VERSION=2.048-r0
@@ -17,7 +17,7 @@ RUN apk upgrade --no-cache --available \
     && apk add --no-cache \
         chromium="${VERSION}" \
         chromium-swiftshader="${VERSION}" \
-        ttf-freefont="${TTF_FREEFONT_VERSION}" \
+        font-freefont="${FONT_FREEFONT_VERSION}" \
         font-noto-emoji="${FONT_NOTO_EMOJI_VERSION}" \
         font-wqy-zenhei="${FONT_WQY_ZENHEI_VERSION}"
 

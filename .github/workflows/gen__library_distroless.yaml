@@ -50,8 +50,6 @@ jobs:
         target:
           - static
           - static-rootless
-          - musl
-          - musl-rootless
         version:
           - latest
   promote:
@@ -118,8 +116,6 @@ jobs:
         target:
           - static
           - static-rootless
-          - musl
-          - musl-rootless
         version:
           - latest
 name: release library/distroless

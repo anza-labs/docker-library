@@ -62,12 +62,3 @@ COPY --from=static-deps /dist /
 
 FROM static AS static-rootless
 USER 65532:65532
-
-FROM ghcr.io/anza-labs/library/musl:v1.2.5 AS musl-dist
-FROM ${BASE_IMAGE} AS musl
-COPY --from=musl-deps /dist /
-COPY --from=static-deps /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY --from=static-deps /dist /
-
-FROM musl AS musl-rootless
-USER 65532:65532
