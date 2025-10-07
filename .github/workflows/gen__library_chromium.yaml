@@ -26,30 +26,29 @@ jobs:
               --build-arg=VERSION=${{ matrix.version }} \
               --build-arg=BASE_IMAGE=docker.io/library/alpine:edge@sha256:115729ec5cb049ba6359c3ab005ac742012d92bbaa5b8bc1a878f1e8f62c0cb8 \
               --platform=linux/${{ matrix.arch }} \
-              --file=library/ldap-tools/Dockerfile \
-              --tag=ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }}-${{ matrix.arch }} \
-              library/ldap-tools
+              --file=library/chromium/Dockerfile \
+              --tag=ghcr.io/anza-labs/library/chromium:${{ matrix.version }}-${{ matrix.arch }} \
+              library/chromium
       - run: |-
           docker \
               push \
-              ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }}-${{ matrix.arch }}
+              ghcr.io/anza-labs/library/chromium:${{ matrix.version }}-${{ matrix.arch }}
       - uses: sigstore/cosign-installer@v3.10.0
       - if: ${{ matrix.version != 'latest' }}
         run: |-
           cosign \
               sign \
               --yes \
-              ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }}-${{ matrix.arch }}
+              ghcr.io/anza-labs/library/chromium:${{ matrix.version }}-${{ matrix.arch }}
     strategy:
       matrix:
         arch:
           - amd64
           - arm64
-          - riscv64
         target:
           - image
         version:
-          - latest
+          - 141.0.7390.54-r0
   promote:
     env: {}
     needs: build
@@ -67,56 +66,49 @@ jobs:
               manifest \
               create \
               --amend \
-              ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }} \
-              ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }}-amd64 \
-              ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }}-arm64 \
-              ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }}-riscv64
+              ghcr.io/anza-labs/library/chromium:${{ matrix.version }} \
+              ghcr.io/anza-labs/library/chromium:${{ matrix.version }}-amd64 \
+              ghcr.io/anza-labs/library/chromium:${{ matrix.version }}-arm64
       - run: |-
           docker \
               manifest \
               annotate \
               --arch=amd64 \
-              ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }} \
-              ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }}-amd64 && \
+              ghcr.io/anza-labs/library/chromium:${{ matrix.version }} \
+              ghcr.io/anza-labs/library/chromium:${{ matrix.version }}-amd64 && \
           docker \
               manifest \
               annotate \
               --arch=arm64 \
-              ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }} \
-              ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }}-arm64 && \
-          docker \
-              manifest \
-              annotate \
-              --arch=riscv64 \
-              ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }} \
-              ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }}-riscv64
+              ghcr.io/anza-labs/library/chromium:${{ matrix.version }} \
+              ghcr.io/anza-labs/library/chromium:${{ matrix.version }}-arm64
       - run: |-
           docker \
               manifest \
               push \
-              ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }}
+              ghcr.io/anza-labs/library/chromium:${{ matrix.version }}
       - uses: sigstore/cosign-installer@v3.10.0
       - if: ${{ matrix.version != 'latest' }}
         run: |-
           cosign \
               sign \
               --yes \
-              ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }}
+              ghcr.io/anza-labs/library/chromium:${{ matrix.version }}
     strategy:
       matrix:
         target:
           - image
         version:
-          - latest
-name: release library/ldap-tools
+          - 141.0.7390.54-r0
+name: release library/chromium
 "on":
   push:
     branches:
       - main
     paths:
-      - .github/workflows/gen__library_ldap-tools.yaml
-      - library/ldap-tools/Dockerfile
-      - library/ldap-tools/pkg.toml
+      - .github/workflows/gen__library_chromium.yaml
+      - library/chromium/Dockerfile
+      - library/chromium/pkg.toml
   workflow_dispatch: {}
 permissions:
   contents: write

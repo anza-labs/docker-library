@@ -1,5 +1,6 @@
 versions = [
-    "latest",
+# renovate: datasource=repology depName=alpine_edge/chromium versioning=loose
+    "141.0.7390.54-r0",
 ]
 
 # renovate: datasource=docker
@@ -8,5 +9,4 @@ base_image = "docker.io/library/alpine:edge@sha256:115729ec5cb049ba6359c3ab005ac
 arch = [
     "amd64",
     "arm64",
-    "riscv64",
 ]
