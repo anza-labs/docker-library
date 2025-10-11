@@ -1,7 +1,7 @@
 ARG BASE_IMAGE
 FROM --platform=$BUILDPLATFORM ghcr.io/anza-labs/library/kubernetes-sources:v1.34.1 AS pre-build
 
-FROM docker.io/library/alpine:3.22.1 AS cbuild
+FROM docker.io/library/alpine:3.22.2 AS cbuild
 
 RUN apk add --no-cache \
     clang make

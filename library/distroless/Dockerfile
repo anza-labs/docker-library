@@ -1,5 +1,5 @@
 ARG BASE_IMAGE
-FROM docker.io/library/alpine:3.22.1 AS musl-deps
+FROM docker.io/library/alpine:3.22.2 AS musl-deps
 
 # install some auxiliary packages
 RUN apk add --no-cache \
