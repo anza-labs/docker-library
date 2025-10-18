@@ -48,7 +48,7 @@ jobs:
         target:
           - image
         version:
-          - 141.0.7390.76-r0
+          - 141.0.7390.107-r0
   promote:
     env: {}
     needs: build
@@ -99,7 +99,7 @@ jobs:
         target:
           - image
         version:
-          - 141.0.7390.76-r0
+          - 141.0.7390.107-r0
 name: release library/chromium
 "on":
   push:
