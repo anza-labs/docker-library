@@ -33,7 +33,7 @@ jobs:
           docker \
               push \
               ghcr.io/anza-labs/library/chromium:${{ matrix.version }}-${{ matrix.arch }}
-      - uses: sigstore/cosign-installer@v3.10.0
+      - uses: sigstore/cosign-installer@v4.0.0
       - if: ${{ matrix.version != 'latest' }}
         run: |-
           cosign \
@@ -48,7 +48,7 @@ jobs:
         target:
           - image
         version:
-          - 141.0.7390.107-r0
+          - 141.0.7390.122-r0
   promote:
     env: {}
     needs: build
@@ -87,7 +87,7 @@ jobs:
               manifest \
               push \
               ghcr.io/anza-labs/library/chromium:${{ matrix.version }}
-      - uses: sigstore/cosign-installer@v3.10.0
+      - uses: sigstore/cosign-installer@v4.0.0
       - if: ${{ matrix.version != 'latest' }}
         run: |-
           cosign \
@@ -99,7 +99,7 @@ jobs:
         target:
           - image
         version:
-          - 141.0.7390.107-r0
+          - 141.0.7390.122-r0
 name: release library/chromium
 "on":
   push:
