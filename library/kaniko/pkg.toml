@@ -1,6 +1,6 @@
 versions = [
 # renovate: datasource=github-tags depName=chainguard-dev/kaniko
-    "v1.25.3",
+    "v1.25.4",
 ]
 
 # renovate: datasource=docker
