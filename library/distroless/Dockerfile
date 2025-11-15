@@ -27,7 +27,7 @@ FROM --platform=$BUILDPLATFORM docker.io/library/alpine:edge@sha256:115729ec5cb0
 ARG VERSION
 
 # renovate: datasource=repology depName=alpine_edge/ca-certificates versioning=loose
-ARG CA_CERTIFICATES_VERSION=20250911-r0
+ARG CA_CERTIFICATES_VERSION=20251003-r0
 
 # Install necessary packages for building and running the application
 RUN apk add --no-cache \
