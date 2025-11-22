@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - id: actionCheckout
-        uses: actions/checkout@v5
+        uses: actions/checkout@v6
       - id: actionSetupQEMU
         uses: docker/setup-qemu-action@v3
       - id: actionDockerLogin
