@@ -7,7 +7,7 @@ ARG VERSION
 ARG FONT_FREEFONT_VERSION=20120503-r4
 
 # renovate: datasource=repology depName=alpine_edge/font-noto-emoji versioning=loose
-ARG FONT_NOTO_EMOJI_VERSION=2.048-r0
+ARG FONT_NOTO_EMOJI_VERSION=2.051-r0
 
 # renovate: datasource=repology depName=alpine_edge/font-wqy-zenhei versioning=loose
 ARG FONT_WQY_ZENHEI_VERSION=0.9.45-r4
