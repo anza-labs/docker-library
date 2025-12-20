@@ -1,5 +1,5 @@
 ARG BASE_IMAGE
-FROM docker.io/library/alpine:3.23.0 AS image
+FROM docker.io/library/alpine:3.23.2 AS image
 
 # select arch
 RUN echo $(case "$(uname -m)" in \
