@@ -1,5 +1,5 @@
 ARG BASE_IMAGE
-FROM --platform=$BUILDPLATFORM ghcr.io/anza-labs/library/kubernetes-sources:v1.34.3 AS pre-build
+FROM --platform=$BUILDPLATFORM ghcr.io/anza-labs/library/kubernetes-sources:v1.35.0 AS pre-build
 
 FROM docker.io/library/alpine:3.23.2 AS cbuild
 
