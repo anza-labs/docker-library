@@ -4,7 +4,7 @@ versions = [
 ]
 
 # renovate: datasource=docker
-base_image = "docker.io/library/alpine:3.23.0"
+base_image = "docker.io/library/alpine:3.23.2"
 
 arch = [
     "amd64",
