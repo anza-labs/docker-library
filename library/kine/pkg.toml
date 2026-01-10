@@ -1,6 +1,6 @@
 versions = [
 # renovate: datasource=github-tags depName=k3s-io/kine
-    "v0.14.9",
+    "v0.14.10",
 ]
 
 arch = [
