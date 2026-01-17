@@ -10,7 +10,7 @@ RUN echo $(case "$(uname -m)" in \
     esac) > /tmp/arch
 
 # renovate: datasource=github-tags depName=grpc-ecosystem/grpc-health-probe
-ARG PROBE_VERSION=v0.4.43
+ARG PROBE_VERSION=v0.4.44
 
 WORKDIR /workspace
 RUN wget "https://github.com/grpc-ecosystem/grpc-health-probe/releases/download/${PROBE_VERSION}/grpc_health_probe-linux-$(cat /tmp/arch)" && \
