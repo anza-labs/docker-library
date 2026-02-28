@@ -1,6 +1,6 @@
 versions = [ 
 # renovate: datasource=github-tags depName=kubernetes/kubernetes
-    "v1.35.1",
+    "v1.35.2",
 ]
 
 # renovate: datasource=docker
