@@ -50,7 +50,7 @@ jobs:
           - executor-debug
           - warmer
         version:
-          - v1.25.7
+          - v1.25.10
   promote:
     env: {}
     needs: build
@@ -103,7 +103,7 @@ jobs:
           - executor-debug
           - warmer
         version:
-          - v1.25.7
+          - v1.25.10
 name: release library/kaniko
 "on":
   push:
