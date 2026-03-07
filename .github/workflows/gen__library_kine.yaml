@@ -4,7 +4,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: docker/login-action@v3
+      - uses: docker/login-action@v4
         with:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
@@ -49,14 +49,14 @@ jobs:
         target:
           - image
         version:
-          - v0.14.12
+          - v0.14.14
   promote:
     env: {}
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
-      - uses: docker/login-action@v3
+      - uses: docker/login-action@v4
         with:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
@@ -107,7 +107,7 @@ jobs:
         target:
           - image
         version:
-          - v0.14.12
+          - v0.14.14
 name: release library/kine
 "on":
   push:
