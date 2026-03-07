@@ -9,7 +9,7 @@ jobs:
       - id: actionCheckout
         uses: actions/checkout@v6
       - id: actionSetupQEMU
-        uses: docker/setup-qemu-action@v3
+        uses: docker/setup-qemu-action@v4
       - id: actionDockerLogin
         uses: docker/login-action@v4
       - id: actionSetupBuildx
