@@ -1,0 +1,8 @@
+#!/bin/sh
+exec /usr/bin/kubelet \
+    \
+    --config=/etc/kubernetes/kubelet.conf \
+    --kubeconfig=/etc/run/secrets/kubeconfig \
+    \
+    > >(awk '{print "[KUBELET] " $0}' | tee /proc/1/fd/1) \
+    2> >(awk '{print "[KUBELET] " $0}' | tee /proc/1/fd/2 >&2)

@@ -24,30 +24,31 @@ jobs:
               --label=org.opencontainers.image.vendor='anza-labs' \
               --target=${{ matrix.target }} \
               --build-arg=VERSION=${{ matrix.version }} \
-              --build-arg=BASE_IMAGE=docker.io/library/alpine:3.23.3 \
+              --build-arg=BASE_IMAGE=docker.io/library/alpine:edge@sha256:115729ec5cb049ba6359c3ab005ac742012d92bbaa5b8bc1a878f1e8f62c0cb8 \
               --platform=linux/${{ matrix.arch }} \
-              --file=library/amber/Dockerfile \
-              --tag=ghcr.io/anza-labs/library/amber:${{ matrix.version }}-${{ matrix.arch }} \
-              library/amber
+              --file=library/alpinkube/Dockerfile \
+              --tag=ghcr.io/anza-labs/library/alpinkube:${{ matrix.version }}-${{ matrix.arch }} \
+              library/alpinkube
       - run: |-
           docker \
               push \
-              ghcr.io/anza-labs/library/amber:${{ matrix.version }}-${{ matrix.arch }}
+              ghcr.io/anza-labs/library/alpinkube:${{ matrix.version }}-${{ matrix.arch }}
       - uses: sigstore/cosign-installer@v4.0.0
       - if: ${{ matrix.version != 'latest' }}
         run: |-
           cosign \
               sign \
               --yes \
-              ghcr.io/anza-labs/library/amber:${{ matrix.version }}-${{ matrix.arch }}
+              ghcr.io/anza-labs/library/alpinkube:${{ matrix.version }}-${{ matrix.arch }}
     strategy:
       matrix:
         arch:
           - amd64
+          - arm64
         target:
           - image
         version:
-          - 0.4.0-alpha
+          - latest
   promote:
     env: {}
     needs: build
@@ -65,42 +66,49 @@ jobs:
               manifest \
               create \
               --amend \
-              ghcr.io/anza-labs/library/amber:${{ matrix.version }} \
-              ghcr.io/anza-labs/library/amber:${{ matrix.version }}-amd64
+              ghcr.io/anza-labs/library/alpinkube:${{ matrix.version }} \
+              ghcr.io/anza-labs/library/alpinkube:${{ matrix.version }}-amd64 \
+              ghcr.io/anza-labs/library/alpinkube:${{ matrix.version }}-arm64
       - run: |-
           docker \
               manifest \
               annotate \
               --arch=amd64 \
-              ghcr.io/anza-labs/library/amber:${{ matrix.version }} \
-              ghcr.io/anza-labs/library/amber:${{ matrix.version }}-amd64
+              ghcr.io/anza-labs/library/alpinkube:${{ matrix.version }} \
+              ghcr.io/anza-labs/library/alpinkube:${{ matrix.version }}-amd64 && \
+          docker \
+              manifest \
+              annotate \
+              --arch=arm64 \
+              ghcr.io/anza-labs/library/alpinkube:${{ matrix.version }} \
+              ghcr.io/anza-labs/library/alpinkube:${{ matrix.version }}-arm64
       - run: |-
           docker \
               manifest \
               push \
-              ghcr.io/anza-labs/library/amber:${{ matrix.version }}
+              ghcr.io/anza-labs/library/alpinkube:${{ matrix.version }}
       - uses: sigstore/cosign-installer@v4.0.0
       - if: ${{ matrix.version != 'latest' }}
         run: |-
           cosign \
               sign \
               --yes \
-              ghcr.io/anza-labs/library/amber:${{ matrix.version }}
+              ghcr.io/anza-labs/library/alpinkube:${{ matrix.version }}
     strategy:
       matrix:
         target:
           - image
         version:
-          - 0.4.0-alpha
-name: release library/amber
+          - latest
+name: release library/alpinkube
 "on":
   push:
     branches:
       - main
     paths:
-      - .github/workflows/gen__library_amber.yaml
-      - library/amber/Dockerfile
-      - library/amber/pkg.toml
+      - .github/workflows/gen__library_alpinkube.yaml
+      - library/alpinkube/Dockerfile
+      - library/alpinkube/pkg.toml
   workflow_dispatch: {}
 permissions:
   contents: write

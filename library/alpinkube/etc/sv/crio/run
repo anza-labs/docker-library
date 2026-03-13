@@ -1,0 +1,7 @@
+#!/bin/sh
+exec /usr/bin/crio \
+    \
+    --enable-metrics \
+    \
+    > >(awk '{print "[CRI-O] " $0}' | tee /proc/1/fd/1) \
+    2> >(awk '{print "[CRI-O] " $0}' | tee /proc/1/fd/2 >&2)
