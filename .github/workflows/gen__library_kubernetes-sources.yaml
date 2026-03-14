@@ -24,7 +24,7 @@ jobs:
               --label=org.opencontainers.image.vendor='anza-labs' \
               --target=${{ matrix.target }} \
               --build-arg=VERSION=${{ matrix.version }} \
-              --build-arg=BASE_IMAGE=docker.io/library/golang:1.24-alpine \
+              --build-arg=BASE_IMAGE=docker.io/library/golang:1.26-alpine \
               --platform=linux/${{ matrix.arch }} \
               --file=library/kubernetes-sources/Dockerfile \
               --tag=ghcr.io/anza-labs/library/kubernetes-sources:${{ matrix.version }}-${{ matrix.arch }} \
@@ -33,7 +33,7 @@ jobs:
           docker \
               push \
               ghcr.io/anza-labs/library/kubernetes-sources:${{ matrix.version }}-${{ matrix.arch }}
-      - uses: sigstore/cosign-installer@v4.0.0
+      - uses: sigstore/cosign-installer@v4.1.0
       - if: ${{ matrix.version != 'latest' }}
         run: |-
           cosign \
@@ -95,7 +95,7 @@ jobs:
               manifest \
               push \
               ghcr.io/anza-labs/library/kubernetes-sources:${{ matrix.version }}
-      - uses: sigstore/cosign-installer@v4.0.0
+      - uses: sigstore/cosign-installer@v4.1.0
       - if: ${{ matrix.version != 'latest' }}
         run: |-
           cosign \
