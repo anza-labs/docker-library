@@ -3,7 +3,7 @@ versions = [
     "v1.35.2",
 ]
 
-# renovate: datasource=docker depName=library/golang
+# renovate: datasource=docker versioning=loose
 base_image = "docker.io/library/golang:1.26-alpine"
 
 arch = [
