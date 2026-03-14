@@ -1,10 +1,10 @@
-versions = [ 
+versions = [
 # renovate: datasource=github-tags depName=kubernetes/kubernetes
     "v1.35.2",
 ]
 
-# renovate: datasource=docker
-base_image = "docker.io/library/golang:1.24-alpine"
+# renovate: datasource=docker depName=library/golang
+base_image = "docker.io/library/golang:1.26-alpine"
 
 arch = [
     "amd64",
