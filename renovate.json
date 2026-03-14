@@ -1,29 +1,22 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "automerge": true,
-  "extends": [
-    "config:recommended"
-  ],
-  "labels": [
-    "area/dependency"
-  ],
+  "extends": ["config:recommended"],
+  "labels": ["area/dependency"],
   "vulnerabilityAlerts": {
     "enabled": true
   },
-  "schedule": [
-    "* * * * 6,0"
-  ],
+  "schedule": ["* * * * 6,0"],
   "ignorePaths": [
     "**/node_modules/**",
     "**/bower_components/**",
     ".github/workflows/gen_*"
   ],
+  "postUpdateOptions": ["gomodTidy", "gomodUpdateImportPaths"],
   "customManagers": [
     {
       "customType": "regex",
-      "managerFilePatterns": [
-        "/Dockerfile$/"
-      ],
+      "managerFilePatterns": ["/Dockerfile$/"],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\sARG (\\w+_)?VERSION=(?<currentValue>\\S+)"
       ],
@@ -31,9 +24,7 @@
     },
     {
       "customType": "regex",
-      "managerFilePatterns": [
-        "/pkg.toml$/"
-      ],
+      "managerFilePatterns": ["/pkg.toml$/"],
       "matchStrings": [
         "# renovate: datasource=(?<datasource>.*?) depName=(?<depName>.*?)( versioning=(?<versioning>.*?))?\\s+\"(?<currentValue>\\S+)\"",
         "# renovate: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))?\\sbase_image = \"(?<depName>.*?):(?<currentValue>\\S+)\""
