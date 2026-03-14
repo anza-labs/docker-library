@@ -22,6 +22,7 @@ ENV VERSION=${VERSION}
 
 ENV CGO_ENABLED=0
 COPY ./ldflags.sh /opt/ldflags.sh
+RUN chmod 0755 /opt/ldflags.sh
 
 FROM build AS kube-apiserver-build
 RUN xx-go build \
