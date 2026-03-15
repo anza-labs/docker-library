@@ -1,6 +1,6 @@
 versions = [
 # renovate: datasource=repology depName=alpine_edge/chromium versioning=loose
-    "145.0.7632.45-r0",
+    "146.0.7680.71-r0",
 ]
 
 # renovate: datasource=docker
