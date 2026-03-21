@@ -6,7 +6,7 @@ RUN apk add --no-cache \
     clang git linux-headers make pkgconf
 
 # renovate: datasource=git-tags depName=git://git.musl-libc.org/musl
-ARG MUSL_VERSION=v1.2.5
+ARG MUSL_VERSION=v1.2.6
 
 WORKDIR /src
 
