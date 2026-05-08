@@ -24,7 +24,7 @@ jobs:
               --label=org.opencontainers.image.vendor='anza-labs' \
               --target=${{ matrix.target }} \
               --build-arg=VERSION=${{ matrix.version }} \
-              --build-arg=BASE_IMAGE=ghcr.io/anza-labs/library/distroless/static:latest \
+              --build-arg=BASE_IMAGE=gcr.io/distroless/static:latest@sha256:47b2d72ff90843eb8a768b5c2f89b40741843b639d065b9b937b07cd59b479c6 \
               --platform=linux/${{ matrix.arch }} \
               --file=library/kaniko/Dockerfile \
               --tag=ghcr.io/anza-labs/library/kaniko/${{ matrix.target }}:${{ matrix.version }}-${{ matrix.arch }} \
