@@ -24,7 +24,7 @@ FROM ${BASE_IMAGE} AS executor-debug
 ENV PATH=/bin:/usr/bin:/usr/local/bin
 
 COPY --from=build /src/kaniko/out/executor /usr/local/bin/executor
-COPY --from=go-busybox / /
+COPY --from=go-busybox /bin /bin
 
 FROM ${BASE_IMAGE} AS executor
 
