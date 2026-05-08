@@ -1,0 +1,14 @@
+versions = [
+# renovate: datasource=git-refs depName=https://github.com/u-root/u-root versioning=git
+    "c2b9e48e151e8efeab13029a9bcf9236eae176ca",
+]
+
+# renovate: datasource=docker
+base_image = "gcr.io/distroless/static:latest@sha256:47b2d72ff90843eb8a768b5c2f89b40741843b639d065b9b937b07cd59b479c6"
+
+arch = [
+    "amd64",
+    "arm64",
+    "ppc64le",
+    "riscv64",
+]
