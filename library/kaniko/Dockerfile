@@ -1,5 +1,5 @@
 ARG BASE_IMAGE
-FROM docker.io/library/golang:1.26-alpine AS build
+FROM docker.io/library/golang:1.26-alpine@sha256:91eda9776261207ea25fd06b5b7fed8d397dd2c0a283e77f2ab6e91bfa71079d AS build
 
 # install some auxiliary packages
 RUN apk add --no-cache \
@@ -18,7 +18,7 @@ RUN make \
     out/executor \
     out/warmer
 
-FROM ghcr.io/anza-labs/library/go-busybox:c2b9e48e151e8efeab13029a9bcf9236eae176ca AS go-busybox
+FROM ghcr.io/anza-labs/library/go-busybox:c2b9e48e151e8efeab13029a9bcf9236eae176ca@sha256:95617cf15469813a100236e476fa8e2009b5a1fdb16235b9fc1df6ae42313794 AS go-busybox
 FROM ${BASE_IMAGE} AS executor-debug
 
 ENV PATH=/bin:/usr/bin:/usr/local/bin
