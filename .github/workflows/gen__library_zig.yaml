@@ -24,7 +24,7 @@ jobs:
               --label=org.opencontainers.image.vendor='anza-labs' \
               --target=${{ matrix.target }} \
               --build-arg=VERSION=${{ matrix.version }} \
-              --build-arg=BASE_IMAGE=docker.io/library/alpine:3.23.3@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659 \
+              --build-arg=BASE_IMAGE=docker.io/library/alpine:3.23.4@sha256:25109184c71bdad752c8312a8623239686a9a2071e8825f20acb8f2198c3f659 \
               --platform=linux/${{ matrix.arch }} \
               --file=library/zig/Dockerfile \
               --tag=ghcr.io/anza-labs/library/zig:${{ matrix.version }}-${{ matrix.arch }} \
