@@ -3,7 +3,7 @@ FROM ${BASE_IMAGE} AS image
 
 # install some auxiliary packages
 RUN apk add --no-cache \
-    git make pkgconf
+    clang git make pkgconf
 
 # select arch
 RUN echo $(case "$(uname -m)" in \
