@@ -19,7 +19,7 @@ RUN make \
     out/executor \
     out/warmer
 
-FROM ghcr.io/anza-labs/library/go-busybox:c2b9e48e151e8efeab13029a9bcf9236eae176ca@sha256:b1b169c9f10f5bd4fb7c5eae545cd9691e7ceb935430770a7297a60bde274ab5 AS go-busybox
+FROM ghcr.io/anza-labs/library/go-busybox:c2b9e48e151e8efeab13029a9bcf9236eae176ca@sha256:8b27c0c47a1401d26b75fc5a9944feb35e2af5d7991179c2f0c81839f4b1a940 AS go-busybox
 FROM ${BASE_IMAGE} AS executor-debug
 
 ENV PATH=/bin:/usr/bin:/usr/local/bin
