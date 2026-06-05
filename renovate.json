@@ -26,7 +26,8 @@
       "customType": "regex",
       "managerFilePatterns": ["/pkg.toml$/"],
       "matchStrings": [
-        "# renovate: datasource=(?<datasource>.*?)( depName=(?<depName>.*?))?( registryUrl=(?<registryUrl>.*?))?( packageName=(?<packageName>.*?))?( versioning=(?<versioning>.*?))?\\s+\"(?<currentValue>\\S+)\"",
+        "# renovate: datasource=(?<datasource>\\S+) packageName=(?<packageName>\\S+) currentValue=(?<currentValue>\\S+)( versioning=(?<versioning>\\S+))?\\s+\"(?<currentDigest>[a-f0-9]{7,40})\"",
+        "# renovate: datasource=(?<datasource>\\S+)( depName=(?<depName>\\S+))?( registryUrl=(?<registryUrl>\\S+))?( packageName=(?<packageName>\\S+))?( versioning=(?<versioning>\\S+))?\\s+\"(?<currentValue>\\S+)\"",
         "# renovate: datasource=(?<datasource>.*?)( versioning=(?<versioning>.*?))?\\sbase_image = \"(?<depName>[^\"]+?):(?<currentValue>[^@\"\\s]+)(?:@sha256:[a-f0-9]+)?\""
       ],
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"

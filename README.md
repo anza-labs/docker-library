@@ -24,6 +24,19 @@ We welcome contributions! Please follow these steps to contribute:
 3. Make your changes.
 4. Submit a pull request.
 
+## Renovate tests
+
+```bash
+GITHUB_TOKEN=$(gh auth token) docker run --rm \
+    --user $(id -u):$(id -g) \
+    -v "$PWD":/src -w /src \
+    -e GITHUB_TOKEN \
+    -e LOG_LEVEL=debug \
+    -e RENOVATE_PLATFORM=local \
+    -e RENOVATE_DRY_RUN=full \
+    renovate/renovate
+```
+
 ## License
 
 This project is licensed under the [Apache-2.0][license].

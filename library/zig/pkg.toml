@@ -1,5 +1,5 @@
 versions = [
-# renovate: datasource=git-tags registryUrl=https://codeberg.org packageName=ziglang/zig
+# renovate: datasource=git-tags packageName=https://codeberg.org/ziglang/zig
     "0.15.2",
 ]
 

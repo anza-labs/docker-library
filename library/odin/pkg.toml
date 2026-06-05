@@ -1,5 +1,5 @@
 versions = [
-# renovate: datasource=github-tags depName=ziglang/zig versioning=loose
+# renovate: datasource=github-tags depName=odin-lang/Odin versioning=loose
     "dev-2026-05",
 ]
 
