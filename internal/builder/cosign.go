@@ -22,6 +22,6 @@ func (c *Cosign) SignImageCommand(registry, repository, name, arch, target, vers
 		"cosign",
 		"sign",
 		"--yes",
-		fmt.Sprintf("%s:%s", full, tag),
+		fmt.Sprintf("%s@$(crane digest %s:%s)", full, full, tag),
 	}
 }

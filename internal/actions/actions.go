@@ -187,6 +187,9 @@ func Release(name string, cfg *config.Config, pkg *config.Package) (map[string]a
 						"run": runPush(name, cfg, pkg),
 					},
 					{
+						"run": `curl -sL "https://github.com/google/go-containerregistry/releases/latest/download/go-containerregistry_$(uname -s)_$(uname -m).tar.gz" | tar xz -C /usr/local/bin crane`,
+					},
+					{
 						"uses": actions["actionCosignInstaller"],
 					},
 					{
@@ -225,6 +228,9 @@ func Release(name string, cfg *config.Config, pkg *config.Package) (map[string]a
 					},
 					{
 						"run": runManifestPush(name, cfg, pkg),
+					},
+					{
+						"run": `curl -sL "https://github.com/google/go-containerregistry/releases/latest/download/go-containerregistry_$(uname -s)_$(uname -m).tar.gz" | tar xz -C /usr/local/bin crane`,
 					},
 					{
 						"uses": actions["actionCosignInstaller"],

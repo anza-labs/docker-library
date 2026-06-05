@@ -109,6 +109,40 @@ func Push(ctx context.Context, image, version, arch, target string) error {
 	return handle.Run()
 }
 
+// Sign...
+func Sign(ctx context.Context, image, version, arch, target string) error {
+	pkg := &config.Package{}
+
+	if err := config.Load(path.Join(image, "pkg.toml"), pkg); err != nil {
+		return err
+	}
+
+	full := path.Join(cfg.Registry.Name, cfg.Registry.Repository, image)
+	if len(pkg.Targets) != 1 {
+		full = path.Join(full, target)
+	}
+
+	tag := version
+	if arch != "" {
+		tag = fmt.Sprintf("%s-%s", tag, arch)
+	}
+
+	imgRef := fmt.Sprintf("%s:%s", full, tag)
+
+	digestCmd := exec.CommandContext(ctx, "crane", "digest", imgRef)
+	digestOut, err := digestCmd.Output()
+	if err != nil {
+		return fmt.Errorf("crane digest: %w", err)
+	}
+	digest := strings.TrimSpace(string(digestOut))
+
+	signCmd := exec.CommandContext(ctx, "cosign", "sign", "--yes", fmt.Sprintf("%s@%s", full, digest))
+	signCmd.Stderr = os.Stderr
+	signCmd.Stdout = os.Stdout
+
+	return signCmd.Run()
+}
+
 // Actions...
 func Actions(ctx context.Context) error {
 	actionsDir := ".github/workflows"
