@@ -17,7 +17,8 @@ RUN echo $(case "$(uname -m)" in \
 ARG VERSION
 
 # download and install zig
-RUN wget "https://ziglang.org/download/${VERSION}/zig-$(cat /tmp/arch)-linux-${VERSION}.tar.xz" && \
+RUN set -aux; \
+    wget "https://ziglang.org/download/${VERSION}/zig-$(cat /tmp/arch)-linux-${VERSION}.tar.xz" && \
     tar -xf /zig-$(cat /tmp/arch)-linux-${VERSION}.tar.xz && \
     mkdir -p /opt/ziglang && \
     mv /zig-$(cat /tmp/arch)-linux-${VERSION}/* /opt/ziglang && \

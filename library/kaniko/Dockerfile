@@ -8,7 +8,8 @@ RUN apk add --no-cache \
 ARG VERSION
 
 WORKDIR /src
-RUN wget "https://github.com/chainguard-dev/kaniko/archive/${VERSION}.tar.gz" && \
+RUN set -aux; \
+    wget "https://github.com/chainguard-dev/kaniko/archive/${VERSION}.tar.gz" && \
     tar -xf ${VERSION}.tar.gz && \
     mv kaniko-${VERSION#v} /src/kaniko && \
     rm -rf ${VERSION}.tar.gz

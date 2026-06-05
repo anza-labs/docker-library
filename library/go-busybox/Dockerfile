@@ -6,7 +6,8 @@ RUN go install github.com/u-root/gobusybox/src/cmd/makebb@latest
 ARG VERSION
 
 WORKDIR /
-RUN wget "https://github.com/u-root/u-root/archive/${VERSION}.tar.gz" && \
+RUN set -aux; \
+    wget "https://github.com/u-root/u-root/archive/${VERSION}.tar.gz" && \
     tar -xf ${VERSION}.tar.gz && \
     mv u-root-${VERSION#v} /src && \
     rm -rf ${VERSION}.tar.gz
