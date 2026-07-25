@@ -1,6 +1,6 @@
 versions = [
 # renovate: datasource=git-refs packageName=https://github.com/u-root/u-root currentValue=main
-    "cc6566d05afcc98f4b666364b279e0591e4f4d47",
+    "9b0bdb8329dbcdc8de9e98c9c21a998ada19f8cc",
 ]
 
 # renovate: datasource=docker
