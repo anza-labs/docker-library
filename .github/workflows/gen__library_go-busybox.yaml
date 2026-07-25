@@ -4,7 +4,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-      - uses: docker/login-action@af1e73f918a031802d376d3c8bbc3fe56130a9b0
+      - uses: docker/login-action@abd2ef45e78c5afb21d64d4ca52ee8550d9572c7
         with:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
@@ -51,14 +51,14 @@ jobs:
         target:
           - image
         version:
-          - cc6566d05afcc98f4b666364b279e0591e4f4d47
+          - 9b0bdb8329dbcdc8de9e98c9c21a998ada19f8cc
   promote:
     env: {}
     needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
-      - uses: docker/login-action@af1e73f918a031802d376d3c8bbc3fe56130a9b0
+      - uses: docker/login-action@abd2ef45e78c5afb21d64d4ca52ee8550d9572c7
         with:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
@@ -117,7 +117,7 @@ jobs:
         target:
           - image
         version:
-          - cc6566d05afcc98f4b666364b279e0591e4f4d47
+          - 9b0bdb8329dbcdc8de9e98c9c21a998ada19f8cc
 name: release library/go-busybox
 "on":
   push:
