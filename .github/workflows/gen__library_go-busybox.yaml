@@ -9,7 +9,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
           registry: ghcr.io
           username: shanduur-auto
-      - uses: docker/setup-qemu-action@96fe6ef7f33517b61c61be40b68a1882f3264fb8
+      - uses: docker/setup-qemu-action@1f40c72289eff860ee54a304f1438e3cff362e0a
       - uses: docker/setup-buildx-action@37fe631027851001ddb9b187196cc803df7f5f0e
       - run: |-
           docker \
@@ -51,7 +51,7 @@ jobs:
         target:
           - image
         version:
-          - 34ab3028053499999c2d8a00a02240fc6e6dbee7
+          - a4e81ffa4751c9d09ca25fe6651e1946f495d249
   promote:
     env: {}
     needs: build
@@ -117,7 +117,7 @@ jobs:
         target:
           - image
         version:
-          - 34ab3028053499999c2d8a00a02240fc6e6dbee7
+          - a4e81ffa4751c9d09ca25fe6651e1946f495d249
 name: release library/go-busybox
 "on":
   push:
