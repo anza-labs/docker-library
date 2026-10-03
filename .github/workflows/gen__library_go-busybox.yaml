@@ -51,7 +51,7 @@ jobs:
         target:
           - image
         version:
-          - d493240d04f6168ed0ce42c7ef76396de75bdd6d
+          - 8c86aab7bbd1189546c5e2771d1dee1708697c5f
   promote:
     env: {}
     needs: build
@@ -117,7 +117,7 @@ jobs:
         target:
           - image
         version:
-          - d493240d04f6168ed0ce42c7ef76396de75bdd6d
+          - 8c86aab7bbd1189546c5e2771d1dee1708697c5f
 name: release library/go-busybox
 "on":
   push:
