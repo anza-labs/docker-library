@@ -51,7 +51,7 @@ jobs:
         target:
           - image
         version:
-          - 0.16.0
+          - 0.17.0
   promote:
     env: {}
     needs: build
@@ -117,7 +117,7 @@ jobs:
         target:
           - image
         version:
-          - 0.16.0
+          - 0.17.0
 name: release library/zig
 "on":
   push:
