@@ -1,6 +1,6 @@
 versions = [
 # renovate: datasource=git-tags packageName=https://codeberg.org/ziglang/zig
-    "0.16.0",
+    "0.17.0",
 ]
 
 # renovate: datasource=docker
