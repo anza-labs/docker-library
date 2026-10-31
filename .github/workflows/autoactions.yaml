@@ -51,7 +51,7 @@ jobs:
           git add .
           git commit -sm "chore: generated actions" || echo "skip_push=true" >> "${GITHUB_ENV}"
 
-      - uses: ad-m/github-push-action@881a6320fdb16eb5318c5054f31c218aec2b324c # master
+      - uses: ad-m/github-push-action@7fba72704ad2db819788db8f2d9e7d1dfbebe089 # master
         if: env.skip_push != 'true'
         with:
           github_token: ${{ secrets.PAT }}
