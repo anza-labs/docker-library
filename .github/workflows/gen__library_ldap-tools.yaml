@@ -34,7 +34,7 @@ jobs:
               push \
               ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }}-${{ matrix.arch }}
       - run: curl -sL "https://github.com/google/go-containerregistry/releases/latest/download/go-containerregistry_$(uname -s)_$(uname -m).tar.gz" | tar xz -C /usr/local/bin crane
-      - uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6
+      - uses: sigstore/cosign-installer@756fe2d284c7292c4e9b62c8a28f1e5629c59532
       - if: ${{ matrix.version != 'latest' }}
         run: |-
           cosign \
@@ -97,7 +97,7 @@ jobs:
               push \
               ghcr.io/anza-labs/library/ldap-tools:${{ matrix.version }}
       - run: curl -sL "https://github.com/google/go-containerregistry/releases/latest/download/go-containerregistry_$(uname -s)_$(uname -m).tar.gz" | tar xz -C /usr/local/bin crane
-      - uses: sigstore/cosign-installer@6f9f17788090df1f26f669e9d70d6ae9567deba6
+      - uses: sigstore/cosign-installer@756fe2d284c7292c4e9b62c8a28f1e5629c59532
       - if: ${{ matrix.version != 'latest' }}
         run: |-
           cosign \
